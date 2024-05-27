@@ -1,14 +1,14 @@
-function LoginBox() {
-  function handleClick(event) {
+function NewUser() {
+  function handleSubmit(event) {
     event.preventDefault();
-    console.log("submitted");
+    console.log("registered");
   }
   return (
     <div className="Log-in">
       <header className="Log-in-header">
-        <h1>Existing User</h1>
+        <h1>New User</h1>
 
-        <form className="Log-in-form" onClick={handleClick}>
+        <form className="Log-in-form" onSubmit={handleSubmit}>
           <div>
             <label>Email:</label>
             <input type="email"></input>
@@ -16,11 +16,11 @@ function LoginBox() {
           <label>Password:</label>
           <input type="password"></input>
           <div>
-            <button>Submit</button>
+            <button>Register</button>
           </div>
         </form>
       </header>
     </div>
   );
 }
-export default LoginBox;
+export default NewUser;
