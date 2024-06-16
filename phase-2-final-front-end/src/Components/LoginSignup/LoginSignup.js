@@ -13,7 +13,7 @@ const LoginSignup = () => {
       </div>
       <div className="inputs">
         <div className="input">
-          <HiOutlineMail />
+          <HiOutlineUser />
           <input type="text" />
         </div>
         <div className="input">
@@ -21,9 +21,16 @@ const LoginSignup = () => {
           <input type="email" />
         </div>
         <div className="input">
-          <HiOutlineMail />
+          <HiOutlineKey />
           <input type="password" />
         </div>
+      </div>
+      <div className="forgot-password">
+        Lost password?<span>Click Here</span>
+      </div>
+      <div className="div.submit-container">
+        <div className="submit">Sign Up</div>
+        <div className="submit">Log In</div>
       </div>
     </div>
   );
