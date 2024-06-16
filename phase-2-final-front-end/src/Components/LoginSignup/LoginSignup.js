@@ -14,15 +14,15 @@ const LoginSignup = () => {
       <div className="inputs">
         <div className="input">
           <HiOutlineUser className="custom-icon" />
-          <input type="text" />
+          <input type="text" placeholder="Name" />
         </div>
         <div className="input">
           <HiOutlineMail className="custom-icon" />
-          <input type="email" />
+          <input type="email" placeholder="Email Id" />
         </div>
         <div className="input">
           <HiOutlineKey className="custom-icon" />
-          <input type="password" />
+          <input type="password" placeholder="Password" />
         </div>
       </div>
       <div className="forgot-password">
