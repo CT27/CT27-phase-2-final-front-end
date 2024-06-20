@@ -36,7 +36,8 @@ const LoginSignup = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (action === "Login") {
       handleLogin();
     } else {
@@ -50,23 +51,39 @@ const LoginSignup = () => {
         <div className="text">{action}</div>
         <div className="underline"></div>
       </div>
+
       <div className="inputs">
         {action === "Login" ? (
           <div></div>
         ) : (
           <div className="input">
             <HiOutlineUser className="custom-icon" />
-            <input type="text" placeholder="Name" />
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
         )}
 
         <div className="input">
           <HiOutlineMail className="custom-icon" />
-          <input type="email" placeholder="Email Id" />
+          <input
+            type="email"
+            placeholder="Email Id"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="input">
           <HiOutlineKey className="custom-icon" />
-          <input type="password" placeholder="Password" />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
       </div>
       {action === "Sign Up" ? (
