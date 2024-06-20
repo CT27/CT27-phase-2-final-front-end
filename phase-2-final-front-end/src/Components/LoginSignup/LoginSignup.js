@@ -3,9 +3,46 @@ import "./LoginSignup.css";
 import { HiOutlineMail } from "react-icons/hi";
 import { HiOutlineUser } from "react-icons/hi";
 import { HiOutlineKey } from "react-icons/hi";
+import axios from "axios";
 
 const LoginSignup = () => {
   const [action, setAction] = useState("Login");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post("http://localhost:3000/api/login", {
+        email,
+        password,
+      });
+      console.log("Login response:", response.data);
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  };
+
+  const handleSignup = async () => {
+    try {
+      const response = await axios.post("http://localhost:3000/api/signup", {
+        name,
+        email,
+        password,
+      });
+      console.log("Signup response:", response.data);
+    } catch (error) {
+      console.error("Signup error:", error);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (action === "Login") {
+      handleLogin();
+    } else {
+      handleSignup();
+    }
+  };
 
   return (
     <div className="container">
