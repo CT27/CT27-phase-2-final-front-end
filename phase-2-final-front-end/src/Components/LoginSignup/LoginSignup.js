@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./LoginSignup.css";
-import { HiOutlineMail } from "react-icons/hi";
-import { HiOutlineUser } from "react-icons/hi";
-import { HiOutlineKey } from "react-icons/hi";
+import { HiOutlineMail, HiOutlineUser, HiOutlineKey } from "react-icons/hi";
 import axios from "axios";
 
 const LoginSignup = () => {
@@ -51,11 +49,8 @@ const LoginSignup = () => {
         <div className="text">{action}</div>
         <div className="underline"></div>
       </div>
-
-      <div className="inputs">
-        {action === "Login" ? (
-          <div></div>
-        ) : (
+      <form onSubmit={handleSubmit} className="inputs">
+        {action === "Sign Up" && (
           <div className="input">
             <HiOutlineUser className="custom-icon" />
             <input
@@ -85,33 +80,28 @@ const LoginSignup = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-      </div>
-      {action === "Sign Up" ? (
-        <div></div>
-      ) : (
-        <div className="forgot-password">
-          Lost password?<span>Click Here</span>
-        </div>
-      )}
 
-      <div className="submit-container">
-        <div
-          className={action === "Login" ? "submit gray" : "submit"}
-          onClick={() => {
-            setAction("Sign Up");
-          }}
-        >
-          Sign Up
+        {action === "Login" && (
+          <div className="forgot-password">
+            Lost password?<span>Click Here</span>
+          </div>
+        )}
+
+        <div className="submit-container">
+          <button
+            className={action === "Login" ? "submit gray" : "submit"}
+            onClick={() => setAction("Sign Up")}
+          >
+            Sign Up
+          </button>
+          <button
+            className={action === "Sign Up" ? "submit gray" : "submit"}
+            onClick={() => setAction("Login")}
+          >
+            Login
+          </button>
         </div>
-        <div
-          className={action === "Sign Up" ? "submit gray" : "submit"}
-          onClick={() => {
-            setAction("Login");
-          }}
-        >
-          Login
-        </div>
-      </div>
+      </form>
     </div>
   );
 };
