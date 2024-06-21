@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom"; // Update to useNavigate
+import { AuthContext } from "../../AuthContext"; // Ensure this path is correct
 import "./LoginSignup.css";
 import { HiOutlineMail, HiOutlineUser, HiOutlineKey } from "react-icons/hi";
 import axios from "axios";
@@ -9,6 +11,9 @@ const LoginSignup = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate(); // Update to useNavigate
 
   const handleLogin = async () => {
     try {
@@ -25,7 +30,8 @@ const LoginSignup = () => {
       }
 
       console.log("Login successful:", user);
-      // Redirect user or set authentication state
+      login();
+      navigate("/dashboard"); // Update to useNavigate
     } catch (error) {
       console.error("Login error:", error.message);
       setErrorMessage(error.message);
@@ -40,7 +46,8 @@ const LoginSignup = () => {
         password,
       });
       console.log("Signup response:", response.data);
-      // Handle successful signup, e.g., redirect user
+      login();
+      navigate("/dashboard"); // Update to useNavigate
     } catch (error) {
       console.error("Signup error:", error.message);
       setErrorMessage(error.message);
@@ -115,6 +122,7 @@ const LoginSignup = () => {
           </button>
         </div>
       </form>
+      {errorMessage && <div className="error">{errorMessage}</div>}
     </div>
   );
 };
