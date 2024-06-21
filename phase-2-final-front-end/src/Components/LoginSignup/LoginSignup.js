@@ -8,29 +8,42 @@ const LoginSignup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/api/login", {
-        email,
-        password,
-      });
-      console.log("Login response:", response.data);
+      const response = await axios.get(
+        `http://localhost:3000/users?email=${email}`
+      );
+      if (response.data.length === 0) {
+        throw new Error("User not found");
+      }
+
+      const user = response.data[0];
+      if (user.password !== password) {
+        throw new Error("Password incorrect");
+      }
+
+      console.log("Login successful:", user);
+      // Redirect user or set authentication state
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Login error:", error.message);
+      setErrorMessage(error.message);
     }
   };
 
   const handleSignup = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/api/signup", {
+      const response = await axios.post("http://localhost:3000/users", {
         name,
         email,
         password,
       });
       console.log("Signup response:", response.data);
+      // Handle successful signup, e.g., redirect user
     } catch (error) {
-      console.error("Signup error:", error);
+      console.error("Signup error:", error.message);
+      setErrorMessage(error.message);
     }
   };
 
