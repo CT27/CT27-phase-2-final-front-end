@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom"; // Update to useNavigate
-import { AuthContext } from "../../AuthContext"; // Ensure this path is correct
+import { AuthContext } from "../../AuthContext.";
+
+// Ensure this path is correct
 import "./LoginSignup.css";
 import { HiOutlineMail, HiOutlineUser, HiOutlineKey } from "react-icons/hi";
 import axios from "axios";
