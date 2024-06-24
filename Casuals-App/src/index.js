@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "./AuthProvider"; // Ensure correct path
+import { AuthProvider } from "./Components/AuthProvider"; // Ensure correct path
 
 ReactDOM.render(
   <React.StrictMode>

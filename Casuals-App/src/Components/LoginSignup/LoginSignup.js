@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom"; // Update to useNavigate
-import { AuthContext } from "../../AuthContext";
+import { AuthContext } from "../AuthContext";
 
 // Ensure this path is correct
 import "./LoginSignup.css";
