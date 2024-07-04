@@ -11,7 +11,6 @@ const LoginSignup = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
   const { login } = useContext(AuthContext);
   const navigate = useNavigate(); // Update to useNavigate
 
