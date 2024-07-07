@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./ForgotPassword.css";
+import { HiOutlineMail, HiOutlineUser, HiOutlineKey } from "react-icons/hi";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -20,15 +21,22 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="forgot-password-container">
-      <input
-        type="email"
-        placeholder="Enter your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button onClick={handleForgotPassword}>Reset Password</button>
-      {message && <p>{message}</p>}
+    <div className="container">
+      <div className="header">
+        <div className="input">
+          <HiOutlineUser className="custom-icon" />
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <button className="reset-password" onClick={handleForgotPassword}>
+          Reset Password
+        </button>
+        {message && <p>{message}</p>}
+      </div>
     </div>
   );
 };
