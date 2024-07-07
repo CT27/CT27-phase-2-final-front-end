@@ -109,10 +109,10 @@ const LoginSignup = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div>
+        <div className="forgot-password-container">
           {action === "Login" && (
             <div className="forgot-password">
-              Lost password?<Link to="/forgotpassword">Click Here</Link>
+              Lost password? <Link to="/forgotpassword">Click Here</Link>
             </div>
           )}
         </div>

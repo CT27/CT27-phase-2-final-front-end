@@ -23,6 +23,8 @@ const ForgotPassword = () => {
   return (
     <div className="container">
       <div className="header">
+        <div className="text">Reset</div>
+        <div className="underline"></div>
         <div className="input">
           <HiOutlineUser className="custom-icon" />
           <input
@@ -32,10 +34,12 @@ const ForgotPassword = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <button className="reset-password" onClick={handleForgotPassword}>
-          Reset Password
-        </button>
-        {message && <p>{message}</p>}
+        <div className="reset-container">
+          <button className="reset-password" onClick={handleForgotPassword}>
+            Reset Password
+          </button>
+          {message && <p>{message}</p>}
+        </div>
       </div>
     </div>
   );
