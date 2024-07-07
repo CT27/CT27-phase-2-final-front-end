@@ -95,7 +95,7 @@ const LoginSignup = () => {
           <HiOutlineMail className="custom-icon" />
           <input
             type="email"
-            placeholder="Email Id"
+            placeholder="Email id"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
