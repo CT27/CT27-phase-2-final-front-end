@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom"; // Update to useNavigate
+import { useNavigate, Link } from "react-router-dom"; // Update to useNavigate
 import { AuthContext } from "../AuthContext"; // Ensure this path is correct
 import "./LoginSignup.css";
 import { HiOutlineMail, HiOutlineUser, HiOutlineKey } from "react-icons/hi";
@@ -15,6 +15,10 @@ const LoginSignup = () => {
   const navigate = useNavigate(); // Update to useNavigate
 
   const handleLogin = async () => {
+    if (!email.trim() || !password.trim()) {
+      setErrorMessage("Email and password are required.");
+      return;
+    }
     try {
       const response = await axios.get(
         `http://localhost:3000/users?email=${email}`
@@ -30,6 +34,7 @@ const LoginSignup = () => {
 
       console.log("Login successful:", user);
       login();
+
       navigate("/dashboard"); // Update to useNavigate
     } catch (error) {
       console.error("Login error:", error.message);
@@ -104,13 +109,13 @@ const LoginSignup = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-
-        {action === "Login" && (
-          <div className="forgot-password">
-            Lost password?<span>Click Here</span>
-          </div>
-        )}
-
+        <div>
+          {action === "Login" && (
+            <div className="forgot-password">
+              Lost password?<Link to="/forgotpassword">Click Here</Link>
+            </div>
+          )}
+        </div>
         <div className="submit-container">
           <button
             className={action === "Login" ? "submit gray" : "submit"}

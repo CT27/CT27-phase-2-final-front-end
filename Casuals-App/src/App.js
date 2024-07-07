@@ -8,13 +8,15 @@ import {
 import "./App.css";
 import LoginSignup from "./Components/LoginSignup/LoginSignup";
 import TimeLogForm from "./Components/TimeLogForm/TimeLogForm";
-import Dashboard from "./Components/Dashboard/Dashboard"; // Correct the import path
+import Dashboard from "./Components/Dashboard/Dashboard";
+import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<LoginSignup />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/timelog" element={<TimeLogForm />} />
         <Route path="*" element={<Navigate to="/login" />} />
