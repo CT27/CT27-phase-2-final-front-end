@@ -38,6 +38,11 @@ const LoginSignup = () => {
   };
 
   const handleSignup = async () => {
+    // Validate inputs
+    if (name === "" || password === "" || email === "") {
+      setErrorMessage("Name, email, and password are required.");
+      return;
+    }
     try {
       const response = await axios.post("http://localhost:3000/users", {
         name,
