@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./ForgotPassword.css";
-import { HiOutlineMail, HiOutlineUser, HiOutlineKey } from "react-icons/hi";
+import { HiOutlineUser } from "react-icons/hi";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
