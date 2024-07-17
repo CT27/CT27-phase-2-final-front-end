@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Dashboard.css";
 import TimeLogForm from "../TimeLogForm/TimeLogForm";
 import Avatar from "../Avatar/Avatar";
+import Sidebar from "../SideBar/SideBar";
 
 const Panel = ({ title, content, onRemove }) => (
   <div className="panel">
@@ -30,21 +31,26 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <div className="dashboard-header">
-        <button onClick={addPanel} className="add-button">
-          Add Panel
-        </button>
+      <div className="sidebar-container">
         <Avatar src="path/to/your/profile/photo.jpg" alt="Profile Photo" />
+        <Sidebar />
       </div>
-      <div className="dashboard">
-        {panels.map((panel, index) => (
-          <Panel
-            key={index}
-            title={panel.title}
-            content={panel.content}
-            onRemove={() => removePanel(index)}
-          />
-        ))}
+      <div className="main-content">
+        <div className="dashboard-header">
+          <button onClick={addPanel} className="add-button">
+            Add Panel
+          </button>
+        </div>
+        <div className="dashboard">
+          {panels.map((panel, index) => (
+            <Panel
+              key={index}
+              title={panel.title}
+              content={panel.content}
+              onRemove={() => removePanel(index)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
