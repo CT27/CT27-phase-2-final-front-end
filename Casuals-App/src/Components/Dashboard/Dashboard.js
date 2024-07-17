@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./Dashboard.css";
 import TimeLogForm from "../TimeLogForm/TimeLogForm";
 import Avatar from "../Avatar/Avatar";
-import { BsPersonCircle } from "react-icons/bs";
 
 const Panel = ({ title, content, onRemove }) => (
   <div className="panel">
@@ -14,14 +13,13 @@ const Panel = ({ title, content, onRemove }) => (
 
 const Dashboard = () => {
   const [panels, setPanels] = useState([
-    { title: "Panel 1", content: "Content of Panel 1" },
-    { title: "Panel 2", content: "Content of Panel 2" },
+    { title: "Timesheet Submission", content: <TimeLogForm /> },
   ]);
 
   const addPanel = () => {
     const newPanel = {
       title: `Panel ${panels.length + 1}`,
-      content: <TimeLogForm />, // Insert the TimeLogForm component here
+      content: <TimeLogForm />,
     };
     setPanels([...panels, newPanel]);
   };
@@ -31,20 +29,23 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard">
+    <div className="dashboard-container">
       <div className="dashboard-header">
-        <Avatar src=<BsPersonCircle /> alt="Profile Photo" />
+        <button onClick={addPanel} className="add-button">
+          Add Panel
+        </button>
+        <Avatar src="path/to/your/profile/photo.jpg" alt="Profile Photo" />
       </div>
-      <button onClick={addPanel}>Add Panel</button>
-
-      {panels.map((panel, index) => (
-        <Panel
-          key={index}
-          title={panel.title}
-          content={panel.content}
-          onRemove={() => removePanel(index)}
-        />
-      ))}
+      <div className="dashboard">
+        {panels.map((panel, index) => (
+          <Panel
+            key={index}
+            title={panel.title}
+            content={panel.content}
+            onRemove={() => removePanel(index)}
+          />
+        ))}
+      </div>
     </div>
   );
 };
