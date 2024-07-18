@@ -1,56 +1,50 @@
 import React, { useState } from "react";
 import "./Dashboard.css";
+import SideBar from "../SideBar/SideBar"; // Ensure the file name matches exactly
 import TimeLogForm from "../TimeLogForm/TimeLogForm";
-import Avatar from "../Avatar/Avatar";
-import Sidebar from "../SideBar/SideBar";
-
-const Panel = ({ title, content, onRemove }) => (
-  <div className="panel">
-    <h2>{title}</h2>
-    <div>{content}</div>
-    <button onClick={onRemove}>Remove Panel</button>
-  </div>
-);
+import PaymentDetails from "../PaymentDetails/PaymentDetails";
+import Reports from "../Reports/Reports";
 
 const Dashboard = () => {
-  const [panels, setPanels] = useState([
-    { title: "Timesheet Submission", content: <TimeLogForm /> },
-  ]);
+  const [selectedTile, setSelectedTile] = useState("Timesheet");
 
-  const addPanel = () => {
-    const newPanel = {
-      title: `Panel ${panels.length + 1}`,
-      content: <TimeLogForm />,
-    };
-    setPanels([...panels, newPanel]);
+  const profile = {
+    picture: "path/to/your/profile/photo.jpg",
+    name: "John Doe",
+    phone: "123-456-7890",
+    address: "123 Main St, City, Country",
   };
 
-  const removePanel = (index) => {
-    setPanels(panels.filter((_, i) => i !== index));
-  };
+  let content;
+  if (selectedTile === "Timesheet") {
+    content = <TimeLogForm />;
+  } else if (selectedTile === "Payment Details") {
+    content = <PaymentDetails />;
+  } else if (selectedTile === "Reports") {
+    content = <Reports />;
+  }
 
   return (
     <div className="dashboard-container">
       <div className="sidebar-container">
-        <Avatar src="path/to/your/profile/photo.jpg" alt="Profile Photo" />
-        <Sidebar />
+        <SideBar profile={profile} />
       </div>
       <div className="main-content">
-        <div className="dashboard-header">
-          <button onClick={addPanel} className="add-button">
-            Add Panel
-          </button>
+        <div className="tile-container">
+          <div className="tile" onClick={() => setSelectedTile("Timesheet")}>
+            Timesheet
+          </div>
+          <div
+            className="tile"
+            onClick={() => setSelectedTile("Payment Details")}
+          >
+            Payment Details
+          </div>
+          <div className="tile" onClick={() => setSelectedTile("Reports")}>
+            Reports
+          </div>
         </div>
-        <div className="dashboard">
-          {panels.map((panel, index) => (
-            <Panel
-              key={index}
-              title={panel.title}
-              content={panel.content}
-              onRemove={() => removePanel(index)}
-            />
-          ))}
-        </div>
+        <div className="content-container">{content}</div>
       </div>
     </div>
   );

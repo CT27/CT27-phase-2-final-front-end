@@ -1,25 +1,16 @@
+// Sidebar.js
 import React from "react";
 import "./SideBar.css";
 
-const Sidebar = () => {
+const SideBar = ({ profile }) => {
   return (
     <div className="sidebar">
-      <ul>
-        <li>
-          <a href="#home">Home</a>
-        </li>
-        <li>
-          <a href="#timesheets">Timesheets</a>
-        </li>
-        <li>
-          <a href="#reports">Reports</a>
-        </li>
-        <li>
-          <a href="#settings">Settings</a>
-        </li>
-      </ul>
+      <img src={profile.picture} alt="Profile" className="profile-picture" />
+      <h2>{profile.name}</h2>
+      <p>{profile.phone}</p>
+      <p>{profile.address}</p>
     </div>
   );
 };
 
-export default Sidebar;
+export default SideBar;

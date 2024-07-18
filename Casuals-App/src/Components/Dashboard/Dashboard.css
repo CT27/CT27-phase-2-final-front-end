@@ -1,67 +1,36 @@
 .dashboard-container {
     display: flex;
-    flex-direction: row;
   }
   
   .sidebar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f4f4f4;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    width: 250px;
   }
   
   .main-content {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    margin-left: 20px;
+    flex: 1;
     padding: 20px;
-    background: #fff;
   }
   
-  .dashboard-header {
+  .tile-container {
     display: flex;
-    justify-content: flex-end;
-    padding: 16px;
+    justify-content: space-around;
+    margin-bottom: 20px;
   }
   
-  .dashboard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 16px;
-    margin-top: 20px;
-  }
-  
-  .panel {
-    border: 1px solid #eaeaea;
-    padding: 16px;
-    border-radius: 8px;
-    width: 300px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #eaeaea;
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .panel:hover {
-    transform: scale(1.05);
-  }
-  
-  .add-button,
-  .remove-button {
-    padding: 8px 16px;
-    border: none;
-    background-color: #C70039;
-    color: white;
-    border-radius: 4px;
+  .tile {
+    flex: 1;
+    padding: 20px;
+    margin: 0 10px;
+    text-align: center;
+    background-color: #f0f0f0;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    border: 1px solid #ddd;
   }
   
-  .add-button:hover,
-  .remove-button:hover {
-    background-color: #960031;
+  .content-container {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
   }
+  
   
