@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import SideBar from "../SideBar/SideBar"; // Ensure the file name matches exactly
 import TimeLogForm from "../TimeLogForm/TimeLogForm";
 import PaymentDetails from "../PaymentDetails/PaymentDetails";
+
 import Reports from "../Reports/Reports";
 
 const Dashboard = () => {
