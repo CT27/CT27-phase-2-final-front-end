@@ -47,8 +47,26 @@ const TimeLogForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(entries);
+
+    // Format the form data
+    const formattedEntries = entries
+      .map((entry) => {
+        const date = entry.date ? format(entry.date, "dd/MM/yyyy") : "N/A";
+        const event = entry.event ? entry.event.label : "N/A";
+        return `Date: ${date}\nEvent: ${event}\nHours Worked: ${entry.hours}`;
+      })
+      .join("\n\n");
+
+    const subject = "Time Log Submission";
+    const body = `Here are the time log entries:\n\n${formattedEntries}`;
+
+    // Construct the mailto URL
+    const mailtoLink = `mailto:?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    // Open the default email client
+    window.location.href = mailtoLink;
   };
 
   return (
