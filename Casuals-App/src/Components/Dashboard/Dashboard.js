@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./Dashboard.css";
-import SideBar from "../SideBar/SideBar"; // Ensure the file name matches exactly
+import SideBar from "../SideBar/SideBar";
 import TimeLogForm from "../TimeLogForm/TimeLogForm";
 import PaymentDetails from "../PaymentDetails/PaymentDetails";
 import Reports from "../Reports/Reports";
@@ -10,7 +11,7 @@ const Dashboard = () => {
 
   const profile = {
     picture: "path/to/your/profile/photo.jpg",
-    name: "John Doe",
+    name: "Candice Test",
     phone: "123-456-7890",
     address: "123 Main St, City, Country",
   };
@@ -31,33 +32,33 @@ const Dashboard = () => {
           <SideBar profile={profile} />
         </div>
         <div className="col-md-9 main-content p-4">
-          <div className="row tile-container">
-            <div className="col-md-4 p-2">
+          <div className="row mb-3">
+            <div className="col-md-4 mb-2">
               <div
-                className="tile d-flex align-items-center justify-content-center"
+                className="tile d-flex align-items-center justify-content-center bg-light border rounded p-3 cursor-pointer"
                 onClick={() => setSelectedTile("Timesheet")}
               >
                 Timesheet
               </div>
             </div>
-            <div className="col-md-4 p-2">
+            <div className="col-md-4 mb-2">
               <div
-                className="tile d-flex align-items-center justify-content-center"
+                className="tile d-flex align-items-center justify-content-center bg-light border rounded p-3 cursor-pointer"
                 onClick={() => setSelectedTile("Payment Details")}
               >
                 Payment Details
               </div>
             </div>
-            <div className="col-md-4 p-2">
+            <div className="col-md-4 mb-2">
               <div
-                className="tile d-flex align-items-center justify-content-center"
+                className="tile d-flex align-items-center justify-content-center bg-light border rounded p-3 cursor-pointer"
                 onClick={() => setSelectedTile("Reports")}
               >
                 Reports
               </div>
             </div>
           </div>
-          <div className="content-container mt-3 p-3 border rounded bg-white">
+          <div className="content-container p-3 border rounded bg-white">
             {content}
           </div>
         </div>

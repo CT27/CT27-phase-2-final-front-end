@@ -1,4 +1,5 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is imported
 
 const Reports = () => {
   // Dummy data for reports
@@ -9,15 +10,28 @@ const Reports = () => {
   ];
 
   return (
-    <div>
-      <h2>Reports</h2>
-      <ul>
-        {reports.map((report, index) => (
-          <li key={index}>
-            {report.date} - {report.hours} hours - {report.event}
-          </li>
-        ))}
-      </ul>
+    <div className="container mt-4">
+      <h2 className="mb-4">Reports</h2>
+      <div className="table-responsive">
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Hours</th>
+              <th>Event</th>
+            </tr>
+          </thead>
+          <tbody>
+            {reports.map((report, index) => (
+              <tr key={index}>
+                <td>{report.date}</td>
+                <td>{report.hours}</td>
+                <td>{report.event}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
-import "./TimeLogForm.css";
+import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is imported
 import { format } from "date-fns";
 
 // Dummy event data
@@ -70,31 +70,40 @@ const TimeLogForm = () => {
   };
 
   return (
-    <div className="time-log-form">
+    <div className="container mt-4">
+      <h2 className="mb-4">Time Log Form</h2>
       <form onSubmit={handleSubmit}>
         {entries.map((entry, index) => (
-          <div key={index} className="entry">
-            <div className="form-group">
-              <label htmlFor={`date-${index}`}>Date:</label>
+          <div key={index} className="mb-3 border p-3 rounded shadow-sm">
+            <div className="mb-3">
+              <label htmlFor={`date-${index}`} className="form-label">
+                Date:
+              </label>
               <DatePicker
                 selected={entry.date}
                 onChange={(date) => handleDateChange(index, date)}
                 dateFormat="dd/MM/yyyy"
                 className="form-control"
+                id={`date-${index}`}
               />
             </div>
-            <div className="form-group">
-              <label htmlFor={`event-${index}`}>Event:</label>
+            <div className="mb-3">
+              <label htmlFor={`event-${index}`} className="form-label">
+                Event:
+              </label>
               <Select
                 id={`event-${index}`}
                 options={events}
                 onChange={(event) => handleEventChange(index, event)}
-                className="form-control"
+                className="react-select-container"
+                classNamePrefix="react-select"
                 value={entry.event}
               />
             </div>
-            <div className="form-group">
-              <label htmlFor={`hours-${index}`}>Hours Worked:</label>
+            <div className="mb-3">
+              <label htmlFor={`hours-${index}`} className="form-label">
+                Hours Worked:
+              </label>
               <input
                 type="number"
                 id={`hours-${index}`}
@@ -106,16 +115,20 @@ const TimeLogForm = () => {
             <button
               type="button"
               onClick={() => removeEntry(index)}
-              className="remove-button"
+              className="btn btn-danger me-2"
             >
               Remove Entry
             </button>
           </div>
         ))}
-        <button type="button" onClick={addEntry} className="add-button">
+        <button
+          type="button"
+          onClick={addEntry}
+          className="btn btn-success me-2"
+        >
           Add Entry
         </button>
-        <button type="submit" className="submit-button">
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
       </form>

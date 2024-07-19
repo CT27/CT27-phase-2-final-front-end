@@ -1,53 +1,5 @@
-.dashboard-container {
-    display: flex;
-  }
-  
-  .sidebar-container {
-    width: 250px;
-  }
-  
-  .main-content {
-    flex: 1;
-    padding: 20px;
-  }
-  
-  .tile-container {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-  }
-  
-  .tile {
-    flex: 1;
-    padding: 20px;
-    margin: 0 10px;
-    text-align: center;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    border: 1px solid #ddd;
-  }
-  
-  .content-container {
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-  }
-  
-  /* Sidebar.css */
-.sidebar {
-  padding: 20px;
-  background-color: #f8f8f8;
-  border-right: 1px solid #ddd;
-  text-align: center;
-  height: 100vh; /* Full height to match the main content */
-}
 
-.profile-picture {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
+
 
  
     

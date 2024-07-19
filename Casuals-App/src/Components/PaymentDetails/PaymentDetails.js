@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-const PaymentDetails = () => {
+const PaymentDetails = ({ userEmail }) => {
   const [userId, setUserId] = useState(null);
   const [bankName, setBankName] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
@@ -9,15 +10,12 @@ const PaymentDetails = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Assuming you have some way to get the current user's email
-  const currentUserEmail = "users.email@example.com"; // Replace with actual logic to get the current user's email
-
   useEffect(() => {
     // Fetch user data to get user ID
     const fetchUserId = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/users?email=${currentUserEmail}`
+          `http://localhost:3000/api/users?email=${userEmail}`
         );
         if (response.data.length > 0) {
           const user = response.data[0];
@@ -32,7 +30,7 @@ const PaymentDetails = () => {
     };
 
     fetchUserId();
-  }, [currentUserEmail]);
+  }, [userEmail]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,39 +61,48 @@ const PaymentDetails = () => {
   };
 
   return (
-    <div>
-      <h2>Payment Details</h2>
+    <div className="container mt-4">
+      <h2 className="mb-4">Payment Details</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Bank Name:</label>
+        <div className="mb-3">
+          <label htmlFor="bankName" className="form-label">
+            Bank Name:
+          </label>
           <input
             type="text"
+            id="bankName"
             className="form-control"
             value={bankName}
             onChange={(e) => setBankName(e.target.value)}
           />
         </div>
-        <div className="form-group">
-          <label>Account Number:</label>
+        <div className="mb-3">
+          <label htmlFor="accountNumber" className="form-label">
+            Account Number:
+          </label>
           <input
             type="text"
+            id="accountNumber"
             className="form-control"
             value={accountNumber}
             onChange={(e) => setAccountNumber(e.target.value)}
           />
         </div>
-        <div className="form-group">
-          <label>BSB Code:</label>
+        <div className="mb-3">
+          <label htmlFor="bsbCode" className="form-label">
+            BSB Code:
+          </label>
           <input
             type="text"
+            id="bsbCode"
             className="form-control"
             value={bsbCode}
             onChange={(e) => setBsbCode(e.target.value)}
           />
         </div>
-        {error && <div className="error">{error}</div>}
-        {success && <div className="success">{success}</div>}
-        <button type="submit" className="submit-button">
+        {error && <div className="alert alert-danger">{error}</div>}
+        {success && <div className="alert alert-success">{success}</div>}
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
       </form>
