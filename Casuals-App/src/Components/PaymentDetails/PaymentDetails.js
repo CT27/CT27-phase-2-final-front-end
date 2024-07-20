@@ -35,6 +35,11 @@ const PaymentDetails = ({ userEmail }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("userId:", userId);
+    console.log("bankName:", bankName);
+    console.log("accountNumber:", accountNumber);
+    console.log("bsbCode:", bsbCode);
+
     if (!userId || !bankName || !accountNumber || !bsbCode) {
       setError("All fields are required.");
       return;
