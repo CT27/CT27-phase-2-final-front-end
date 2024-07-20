@@ -4,6 +4,7 @@ import "./Dashboard.css";
 import TimeLogForm from "../TimeLogForm/TimeLogForm";
 import PaymentDetails from "../PaymentDetails/PaymentDetails";
 import Reports from "../Reports/Reports";
+import Profile from "../Profile"; // Import the Profile component
 import { useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import axios from "axios";
@@ -26,12 +27,11 @@ const Dashboard = () => {
           const response = await axios.get(
             `http://localhost:3000/users/${userId}`
           );
-          const user = response.data;
-
-          if (user) {
+          if (response.status === 200) {
+            const user = response.data;
             setProfile(user);
           } else {
-            console.log("User not found in the data."); // Debug
+            console.log("User not found or server error."); // Debug
           }
         } catch (error) {
           console.error("Error fetching user data:", error);
@@ -55,9 +55,11 @@ const Dashboard = () => {
   if (selectedTile === "Timesheet") {
     content = <TimeLogForm />;
   } else if (selectedTile === "Payment Details") {
-    content = <PaymentDetails />;
+    content = <PaymentDetails userId={profile?.id} />;
   } else if (selectedTile === "Reports") {
     content = <Reports />;
+  } else if (selectedTile === "Profile") {
+    content = <Profile profile={profile} />;
   }
 
   return (
@@ -98,7 +100,15 @@ const Dashboard = () => {
           )}
 
           <div className="row mb-3">
-            <div className="col-md-4 mb-2">
+            <div className="col-md-3 mb-2">
+              <div
+                className="tile d-flex align-items-center justify-content-center bg-light border rounded p-3 cursor-pointer"
+                onClick={() => setSelectedTile("Profile")}
+              >
+                Profile
+              </div>
+            </div>
+            <div className="col-md-3 mb-2">
               <div
                 className="tile d-flex align-items-center justify-content-center bg-light border rounded p-3 cursor-pointer"
                 onClick={() => setSelectedTile("Timesheet")}
@@ -106,7 +116,7 @@ const Dashboard = () => {
                 Timesheet
               </div>
             </div>
-            <div className="col-md-4 mb-2">
+            <div className="col-md-3 mb-2">
               <div
                 className="tile d-flex align-items-center justify-content-center bg-light border rounded p-3 cursor-pointer"
                 onClick={() => setSelectedTile("Payment Details")}
@@ -114,9 +124,9 @@ const Dashboard = () => {
                 Payment Details
               </div>
             </div>
-            <div className="col-md-4 mb-2">
+            <div className="col-md-3 mb-2">
               <div
-                className="tile d-flex align-items-center justify-content-center bg-light border rounded p-3 cursor-pointer"
+                class="tile d-flex align-items-center justify-content-center bg-light border rounded p-3 cursor-pointer"
                 onClick={() => setSelectedTile("Reports")}
               >
                 Reports

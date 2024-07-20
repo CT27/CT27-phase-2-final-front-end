@@ -12,7 +12,7 @@ const LoginSignup = () => {
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { login } = useContext(AuthContext);
-  const navigate = useNavigate(); // Update to useNavigate
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {
@@ -46,7 +46,6 @@ const LoginSignup = () => {
   };
 
   const handleSignup = async () => {
-    // Validate inputs
     if (name === "" || password === "" || email === "") {
       setErrorMessage("Name, email, and password are required.");
       return;
@@ -60,7 +59,6 @@ const LoginSignup = () => {
       });
       console.log("Signup response:", response.data);
 
-      // Assuming response.data contains the new user data
       const newUser = response.data;
 
       // Store userId in localStorage

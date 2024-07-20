@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const PaymentDetails = ({ userEmail }) => {
-  const [userId, setUserId] = useState(null);
+const PaymentDetails = ({ userId }) => {
   const [bankName, setBankName] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [bsbCode, setBsbCode] = useState("");
@@ -11,26 +10,25 @@ const PaymentDetails = ({ userEmail }) => {
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
-    // Fetch user data to get user ID
-    const fetchUserId = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/api/users?email=${userEmail}`
-        );
-        if (response.data.length > 0) {
-          const user = response.data[0];
-          setUserId(user.id);
-        } else {
-          setError("User not found.");
+    const fetchUserDetails = async () => {
+      if (userId) {
+        try {
+          const response = await axios.get(
+            `http://localhost:3000/users/${userId}`
+          );
+          const userDetails = response.data;
+          setBankName(userDetails.bankName || "");
+          setAccountNumber(userDetails.accountNumber || "");
+          setBsbCode(userDetails.bsbCode || "");
+        } catch (err) {
+          console.error("Error fetching user details:", err.message);
+          setError("Failed to fetch user details.");
         }
-      } catch (err) {
-        console.error("Error fetching user data:", err.message);
-        setError("Failed to fetch user data.");
       }
     };
 
-    fetchUserId();
-  }, [userEmail]);
+    fetchUserDetails();
+  }, [userId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,19 +39,27 @@ const PaymentDetails = ({ userEmail }) => {
     }
 
     try {
-      // Update user profile with new bank details
-      const response = await axios.put(
-        `http://localhost:3000/api/users/${userId}`,
-        {
-          bankName,
-          accountNumber,
-          bsbCode,
-        }
+      // Fetch the current user data
+      const response = await axios.get(`http://localhost:3000/users/${userId}`);
+      const currentUserDetails = response.data;
+
+      // Merge existing user details with new payment details
+      const updatedUserDetails = {
+        ...currentUserDetails,
+        bankName,
+        accountNumber,
+        bsbCode,
+      };
+
+      // Update the user data with merged details
+      const updateResponse = await axios.put(
+        `http://localhost:3000/users/${userId}`,
+        updatedUserDetails
       );
 
-      console.log("Payment details updated successfully:", response.data);
+      console.log("Payment details updated successfully:", updateResponse.data);
       setSuccess("Payment details updated successfully.");
-      setError(""); // Clear any previous errors
+      setError("");
     } catch (error) {
       console.error("Error updating payment details:", error.message);
       setError("Failed to update payment details.");
@@ -64,6 +70,18 @@ const PaymentDetails = ({ userEmail }) => {
     <div className="container mt-4">
       <h2 className="mb-4">Payment Details</h2>
       <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="userId" className="form-label">
+            User ID:
+          </label>
+          <input
+            type="text"
+            id="userId"
+            className="form-control"
+            value={userId || ""}
+            readOnly
+          />
+        </div>
         <div className="mb-3">
           <label htmlFor="bankName" className="form-label">
             Bank Name:
