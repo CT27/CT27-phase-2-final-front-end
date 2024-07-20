@@ -4,45 +4,51 @@ import "./Dashboard.css";
 import TimeLogForm from "../TimeLogForm/TimeLogForm";
 import PaymentDetails from "../PaymentDetails/PaymentDetails";
 import Reports from "../Reports/Reports";
-import Profile from "../Profile";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // Import axios
+import { FaSignOutAlt } from "react-icons/fa";
+import axios from "axios";
 
 const Dashboard = () => {
   const [selectedTile, setSelectedTile] = useState("Timesheet");
-  const [userId, setUserId] = useState(null);
-  const [userDetails, setUserDetails] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch user details from the backend
-    const fetchUserDetails = async () => {
-      try {
-        const response = await axios.get("/api/login", {
-          withCredentials: true,
-        });
-        const { user } = response.data;
-        setUserId(user.id);
-        setUserDetails(user);
-      } catch (error) {
-        console.error("Failed to fetch user details:", error);
-        navigate("/login");
+    const fetchUserData = async () => {
+      const userId = localStorage.getItem("userId");
+
+      console.log("Fetching user data for userId:", userId); // Debug
+
+      if (userId) {
+        try {
+          // Fetch user data by ID
+          const response = await axios.get(
+            `http://localhost:3000/users/${userId}`
+          );
+          const user = response.data;
+
+          if (user) {
+            setProfile(user);
+          } else {
+            console.log("User not found in the data."); // Debug
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
       }
     };
 
-    fetchUserDetails();
-  }, [navigate]);
+    fetchUserData();
+  }, []);
 
   const handleSignOut = () => {
-    axios
-      .post("/api/logout", {}, { withCredentials: true }) // Ensure logout is handled on the server
-      .then(() => {
-        navigate("/login");
-      })
-      .catch((error) => {
-        console.error("Sign out failed:", error);
-        navigate("/login");
-      });
+    localStorage.removeItem("userId");
+    navigate("/login");
   };
 
   let content;
@@ -52,26 +58,47 @@ const Dashboard = () => {
     content = <PaymentDetails />;
   } else if (selectedTile === "Reports") {
     content = <Reports />;
-  } else if (selectedTile === "Profile" && userId && userDetails) {
-    content = <Profile user={userDetails} onSignOut={handleSignOut} />;
-  } else if (selectedTile === "Profile" && (!userId || !userDetails)) {
-    content = <p>No user details found. Please log in again.</p>;
   }
 
   return (
     <div className="container-fluid h-100">
       <div className="row h-100">
         <div className="col-md-12 main-content p-4">
-          <div className="row mb-3">
-            <div className="col-md-3 mb-2">
-              <div
-                className="tile d-flex align-items-center justify-content-center bg-light border rounded p-3 cursor-pointer"
-                onClick={() => setSelectedTile("Profile")}
-              >
-                Profile
+          {loading ? (
+            <div className="text-center">
+              <p>Loading profile...</p>
+            </div>
+          ) : profile ? (
+            <div className="card mb-4">
+              <div className="card-body d-flex align-items-center">
+                <img
+                  src={profile.picture || "path/to/default/profile/photo.jpg"}
+                  alt="Profile"
+                  className="rounded-circle me-3"
+                  style={{ width: "80px", height: "80px" }}
+                />
+                <div>
+                  <h5 className="card-title mb-1">{profile.name}</h5>
+                  <p className="card-text mb-1">{profile.email}</p>
+                  <p className="card-text mb-2">User ID: {profile.id}</p>
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={handleSignOut}
+                  >
+                    <FaSignOutAlt className="me-2" />
+                    Sign Out
+                  </button>
+                </div>
               </div>
             </div>
-            <div className="col-md-3 mb-2">
+          ) : (
+            <div className="text-center">
+              <p>No profile data available.</p>
+            </div>
+          )}
+
+          <div className="row mb-3">
+            <div className="col-md-4 mb-2">
               <div
                 className="tile d-flex align-items-center justify-content-center bg-light border rounded p-3 cursor-pointer"
                 onClick={() => setSelectedTile("Timesheet")}
@@ -79,7 +106,7 @@ const Dashboard = () => {
                 Timesheet
               </div>
             </div>
-            <div className="col-md-3 mb-2">
+            <div className="col-md-4 mb-2">
               <div
                 className="tile d-flex align-items-center justify-content-center bg-light border rounded p-3 cursor-pointer"
                 onClick={() => setSelectedTile("Payment Details")}
@@ -87,7 +114,7 @@ const Dashboard = () => {
                 Payment Details
               </div>
             </div>
-            <div className="col-md-3 mb-2">
+            <div className="col-md-4 mb-2">
               <div
                 className="tile d-flex align-items-center justify-content-center bg-light border rounded p-3 cursor-pointer"
                 onClick={() => setSelectedTile("Reports")}
