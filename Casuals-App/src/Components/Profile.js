@@ -1,6 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const Profile = ({ profile }) => {
+const Profile = ({ userId }) => {
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (userId) {
+        try {
+          const response = await axios.get(
+            `http://localhost:3000/users/${userId}`
+          );
+          if (response.status === 200) {
+            const user = response.data;
+            setProfile(user);
+          } else {
+            console.log("User not found or server error.");
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [userId]);
+
+  if (loading) {
+    return <p>Loading profile...</p>;
+  }
+
   if (!profile) {
     return <p>No profile data available.</p>;
   }

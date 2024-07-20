@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Dashboard.css";
 import TimeLogForm from "../TimeLogForm/TimeLogForm";
@@ -7,44 +7,11 @@ import Reports from "../Reports/Reports";
 import Profile from "../Profile"; // Import the Profile component
 import { useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
-import axios from "axios";
 
 const Dashboard = () => {
   const [selectedTile, setSelectedTile] = useState("Timesheet");
-  const [profile, setProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); // No longer needed for profile loading
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const userId = localStorage.getItem("userId");
-
-      console.log("Fetching user data for userId:", userId); // Debug
-
-      if (userId) {
-        try {
-          // Fetch user data by ID
-          const response = await axios.get(
-            `http://localhost:3000/users/${userId}`
-          );
-          if (response.status === 200) {
-            const user = response.data;
-            setProfile(user);
-          } else {
-            console.log("User not found or server error."); // Debug
-          }
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        } finally {
-          setLoading(false);
-        }
-      } else {
-        setLoading(false);
-      }
-    };
-
-    fetchUserData();
-  }, []);
 
   const handleSignOut = () => {
     localStorage.removeItem("userId");
@@ -55,49 +22,37 @@ const Dashboard = () => {
   if (selectedTile === "Timesheet") {
     content = <TimeLogForm />;
   } else if (selectedTile === "Payment Details") {
-    content = <PaymentDetails userId={profile?.id} />;
+    content = <PaymentDetails />;
   } else if (selectedTile === "Reports") {
     content = <Reports />;
   } else if (selectedTile === "Profile") {
-    content = <Profile profile={profile} />;
+    const userId = localStorage.getItem("userId");
+    content = <Profile userId={userId} />;
   }
 
   return (
     <div className="container-fluid h-100">
       <div className="row h-100">
         <div className="col-md-12 main-content p-4">
-          {loading ? (
-            <div className="text-center">
-              <p>Loading profile...</p>
-            </div>
-          ) : profile ? (
-            <div className="card mb-4">
-              <div className="card-body d-flex align-items-center">
-                <img
-                  src={profile.picture || "path/to/default/profile/photo.jpg"}
-                  alt="Profile"
-                  className="rounded-circle me-3"
-                  style={{ width: "80px", height: "80px" }}
-                />
-                <div>
-                  <h5 className="card-title mb-1">{profile.name}</h5>
-                  <p className="card-text mb-1">{profile.email}</p>
-                  <p className="card-text mb-2">User ID: {profile.id}</p>
-                  <button
-                    className="btn btn-outline-danger"
-                    onClick={handleSignOut}
-                  >
-                    <FaSignOutAlt className="me-2" />
-                    Sign Out
-                  </button>
-                </div>
+          <div className="card mb-4">
+            <div className="card-body d-flex align-items-center">
+              <img
+                src="path/to/default/profile/photo.jpg" // Default profile photo
+                alt="Profile"
+                className="rounded-circle me-3"
+                style={{ width: "80px", height: "80px" }}
+              />
+              <div>
+                <button
+                  className="btn btn-outline-danger"
+                  onClick={handleSignOut}
+                >
+                  <FaSignOutAlt className="me-2" />
+                  Sign Out
+                </button>
               </div>
             </div>
-          ) : (
-            <div className="text-center">
-              <p>No profile data available.</p>
-            </div>
-          )}
+          </div>
 
           <div className="row mb-3">
             <div className="col-md-3 mb-2">
@@ -126,7 +81,7 @@ const Dashboard = () => {
             </div>
             <div className="col-md-3 mb-2">
               <div
-                class="tile d-flex align-items-center justify-content-center bg-light border rounded p-3 cursor-pointer"
+                className="tile d-flex align-items-center justify-content-center bg-light border rounded p-3 cursor-pointer"
                 onClick={() => setSelectedTile("Reports")}
               >
                 Reports
