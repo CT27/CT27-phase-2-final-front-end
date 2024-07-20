@@ -35,33 +35,28 @@ const PaymentDetails = ({ userEmail }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("userId:", userId);
-    console.log("bankName:", bankName);
-    console.log("accountNumber:", accountNumber);
-    console.log("bsbCode:", bsbCode);
-
     if (!userId || !bankName || !accountNumber || !bsbCode) {
       setError("All fields are required.");
       return;
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/payment-details",
+      // Update user profile with new bank details
+      const response = await axios.put(
+        `http://localhost:3000/api/users/${userId}`,
         {
-          userId,
           bankName,
           accountNumber,
           bsbCode,
         }
       );
 
-      console.log("Payment details saved successfully:", response.data);
-      setSuccess("Payment details saved successfully.");
+      console.log("Payment details updated successfully:", response.data);
+      setSuccess("Payment details updated successfully.");
       setError(""); // Clear any previous errors
     } catch (error) {
-      console.error("Error saving payment details:", error.message);
-      setError("Failed to save payment details.");
+      console.error("Error updating payment details:", error.message);
+      setError("Failed to update payment details.");
     }
   };
 

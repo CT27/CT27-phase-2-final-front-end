@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom"; // Update to useNavigate
+import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../AuthContext"; // Ensure this path is correct
 import "./LoginSignup.css";
 import { HiOutlineMail, HiOutlineUser, HiOutlineKey } from "react-icons/hi";
@@ -20,6 +20,7 @@ const LoginSignup = () => {
       return;
     }
     try {
+      // Fetch user data by email
       const response = await axios.get(
         `http://localhost:3000/users?email=${email}`
       );
@@ -33,9 +34,11 @@ const LoginSignup = () => {
       }
 
       console.log("Login successful:", user);
+      // Store userId in localStorage
+      localStorage.setItem("userId", user.id);
       login();
 
-      navigate("/dashboard"); // Update to useNavigate
+      navigate("/dashboard"); // Redirect to dashboard
     } catch (error) {
       console.error("Login error:", error.message);
       setErrorMessage(error.message);
@@ -49,14 +52,22 @@ const LoginSignup = () => {
       return;
     }
     try {
+      // Create a new user
       const response = await axios.post("http://localhost:3000/users", {
         name,
         email,
         password,
       });
       console.log("Signup response:", response.data);
+
+      // Assuming response.data contains the new user data
+      const newUser = response.data;
+
+      // Store userId in localStorage
+      localStorage.setItem("userId", newUser.id);
       login();
-      navigate("/dashboard"); // Update to useNavigate
+
+      navigate("/dashboard"); // Redirect to dashboard
     } catch (error) {
       console.error("Signup error:", error.message);
       setErrorMessage(error.message);
