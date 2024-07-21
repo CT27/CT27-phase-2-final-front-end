@@ -6,7 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+
 import LoginSignup from "./Components/LoginSignup/LoginSignup";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";

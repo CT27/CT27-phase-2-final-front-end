@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "../Header";
 import TimeLogForm from "../TimeLogForm/TimeLogForm";
 import PaymentDetails from "../PaymentDetails/PaymentDetails";
 import Reports from "../Reports/Reports";
-import Profile from "../Profile";
+import Profile from "../Profile"; // Import the Profile component
 
 const Dashboard = () => {
   const [selectedTile, setSelectedTile] = useState("Timesheet");
@@ -21,6 +22,7 @@ const Dashboard = () => {
 
   return (
     <div className="container-fluid h-100">
+      <Header /> {/* Add the Header component here */}
       <div className="row mb-3">
         <div className="col-md-3 mb-2">
           <div
