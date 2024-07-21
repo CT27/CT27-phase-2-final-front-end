@@ -1,29 +1,38 @@
 import React from "react";
+import { FaSignOutAlt } from "react-icons/fa";
+import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-const Profile = ({ user, onSignOut }) => {
+const Profile = () => {
+  const handleSignOut = () => {
+    // Add your sign-out logic here, e.g., clear user session, redirect to login page, etc.
+    console.log("User signed out");
+    // Example: Redirect to login page
+    window.location.href = "/login";
+  };
+
   return (
-    <div className="card mb-4">
-      <div className="card-body d-flex align-items-center">
-        {user ? (
-          <>
+    <div className="row h-100">
+      <div className="col-md-12 main-content p-4">
+        <div className="card mb-4">
+          <div className="card-body d-flex align-items-center">
             <img
-              src={user.picture || "path/to/default/profile/photo.jpg"}
+              src="path/to/default/profile/photo.jpg" // Default profile photo
               alt="Profile"
               className="rounded-circle me-3"
               style={{ width: "80px", height: "80px" }}
             />
             <div>
-              <h5 className="card-title mb-1">{user.name}</h5>
-              <p className="card-text mb-1">{user.email}</p>
-              <p className="card-text mb-2">User ID: {user.id}</p>
+              <button
+                className="btn btn-outline-danger"
+                onClick={handleSignOut}
+              >
+                <FaSignOutAlt className="me-2" />
+                Sign Out
+              </button>
             </div>
-          </>
-        ) : (
-          <p>No profile data available.</p>
-        )}
-        <button className="btn btn-outline-danger ms-auto" onClick={onSignOut}>
-          Sign Out
-        </button>
+          </div>
+        </div>
       </div>
     </div>
   );
