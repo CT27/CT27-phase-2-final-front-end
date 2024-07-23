@@ -13,9 +13,17 @@ const events = [
   // Add more dummy events as needed
 ];
 
+// Dummy authorizers data
+const authorizers = [
+  { value: "authorizer1", label: "Manager 1" },
+  { value: "authorizer2", label: "Manager 2" },
+  { value: "authorizer3", label: "Manager 3" },
+  // Add more dummy authorizers as needed
+];
+
 const TimeLogForm = () => {
   const [entries, setEntries] = useState([
-    { date: null, event: null, hours: "" },
+    { date: null, event: null, hours: "", authorizer: null },
   ]);
 
   const handleDateChange = (index, date) => {
@@ -36,8 +44,17 @@ const TimeLogForm = () => {
     setEntries(newEntries);
   };
 
+  const handleAuthorizerChange = (index, authorizer) => {
+    const newEntries = [...entries];
+    newEntries[index].authorizer = authorizer;
+    setEntries(newEntries);
+  };
+
   const addEntry = () => {
-    setEntries([...entries, { date: null, event: null, hours: "" }]);
+    setEntries([
+      ...entries,
+      { date: null, event: null, hours: "", authorizer: null },
+    ]);
   };
 
   const removeEntry = (index) => {
@@ -48,25 +65,33 @@ const TimeLogForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Format the form data
-    const formattedEntries = entries
-      .map((entry) => {
-        const date = entry.date ? format(entry.date, "dd/MM/yyyy") : "N/A";
-        const event = entry.event ? entry.event.label : "N/A";
-        return `Date: ${date}\nEvent: ${event}\nHours Worked: ${entry.hours}`;
-      })
-      .join("\n\n");
+    const userId = localStorage.getItem("userId");
 
-    const subject = "Time Log Submission";
-    const body = `Here are the time log entries:\n\n${formattedEntries}`;
+    if (!userId) {
+      alert("No logged-in user found!");
+      return;
+    }
 
-    // Construct the mailto URL
-    const mailtoLink = `mailto:?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
+    const formattedEntries = entries.map((entry) => ({
+      date: entry.date ? format(entry.date, "dd/MM/yyyy") : "N/A",
+      event: entry.event ? entry.event.label : "N/A",
+      hours: entry.hours,
+      authorizer: entry.authorizer ? entry.authorizer.label : "N/A",
+    }));
 
-    // Open the default email client
-    window.location.href = mailtoLink;
+    const existingSubmissions =
+      JSON.parse(localStorage.getItem(`timesheetSubmissions_${userId}`)) || [];
+    const updatedSubmissions = [...existingSubmissions, ...formattedEntries];
+
+    localStorage.setItem(
+      `timesheetSubmissions_${userId}`,
+      JSON.stringify(updatedSubmissions)
+    );
+
+    alert("Time log entries sent for authorization!");
+
+    // Clear form fields
+    setEntries([{ date: null, event: null, hours: "", authorizer: null }]);
   };
 
   return (
@@ -110,6 +135,21 @@ const TimeLogForm = () => {
                 value={entry.hours}
                 onChange={(e) => handleHoursChange(index, e)}
                 className="form-control"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor={`authorizer-${index}`} className="form-label">
+                Authorizer:
+              </label>
+              <Select
+                id={`authorizer-${index}`}
+                options={authorizers}
+                onChange={(authorizer) =>
+                  handleAuthorizerChange(index, authorizer)
+                }
+                className="react-select-container"
+                classNamePrefix="react-select"
+                value={entry.authorizer}
               />
             </div>
             <button

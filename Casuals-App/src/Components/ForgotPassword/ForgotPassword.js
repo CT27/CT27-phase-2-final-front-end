@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./ForgotPassword.css";
 import { HiOutlineUser } from "react-icons/hi";
 
@@ -21,26 +22,34 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="container">
-      <div className="header">
-        <div className="text">Reset</div>
-        <div className="underline"></div>
-        <div className="input">
-          <HiOutlineUser className="custom-icon" />
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="reset-container">
-          <button className="reset-password" onClick={handleForgotPassword}>
-            Reset Password
-          </button>
-          {message && <p>{message}</p>}
-        </div>
+    <div className="container mt-5">
+      <div className="text-center mb-4">
+        <h1>Reset Password</h1>
+        <hr className="my-4" />
       </div>
+      <div className="mb-3">
+        <label className="form-label" htmlFor="email">
+          <HiOutlineUser className="me-2" /> Enter your email
+        </label>
+        <input
+          type="email"
+          id="email"
+          className="form-control"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div className="d-grid">
+        <button className="btn btn-primary" onClick={handleForgotPassword}>
+          Reset Password
+        </button>
+      </div>
+      {message && (
+        <div className="alert alert-info mt-3" role="alert">
+          {message}
+        </div>
+      )}
     </div>
   );
 };

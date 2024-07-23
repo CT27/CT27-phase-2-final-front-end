@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../AuthContext"; // Ensure this path is correct
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./LoginSignup.css";
 import { HiOutlineMail, HiOutlineUser, HiOutlineKey } from "react-icons/hi";
 import axios from "axios";
@@ -95,17 +96,21 @@ const LoginSignup = () => {
   };
 
   return (
-    <div className="container">
-      <div className="header">
-        <div className="text">{action}</div>
-        <div className="underline"></div>
+    <div className="container mt-5">
+      <div className="text-center mb-4">
+        <h1>{action}</h1>
+        <hr className="my-4" />
       </div>
-      <form onSubmit={handleSubmit} className="inputs">
+      <form onSubmit={handleSubmit}>
         {action === "Sign Up" && (
-          <div className="input">
-            <HiOutlineUser className="custom-icon" />
+          <div className="mb-3">
+            <label className="form-label" htmlFor="name">
+              <HiOutlineUser className="me-2" /> Name
+            </label>
             <input
               type="text"
+              id="name"
+              className="form-control"
               placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -113,52 +118,66 @@ const LoginSignup = () => {
           </div>
         )}
 
-        <div className="input">
-          <HiOutlineMail className="custom-icon" />
+        <div className="mb-3">
+          <label className="form-label" htmlFor="email">
+            <HiOutlineMail className="me-2" /> Email
+          </label>
           <input
             type="email"
-            placeholder="Email id"
+            id="email"
+            className="form-control"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="input">
-          <HiOutlineKey className="custom-icon" />
+        <div className="mb-3">
+          <label className="form-label" htmlFor="password">
+            <HiOutlineKey className="me-2" /> Password
+          </label>
           <input
             type="password"
+            id="password"
+            className="form-control"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="forgot-password-container">
-          {action === "Login" && (
-            <div className="forgot-password">
-              Lost password? <Link to="/forgotpassword">Click Here</Link>
-            </div>
-          )}
-        </div>
-        <div className="submit-container">
+        {action === "Login" && (
+          <div className="mb-3 text-end">
+            <Link to="/forgotpassword">Lost password? Click Here</Link>
+          </div>
+        )}
+        <div className="d-flex justify-content-between mb-3">
           <button
             type="button"
-            className={action === "Login" ? "submit gray" : "submit"}
+            className={`btn ${
+              action === "Login" ? "btn-secondary" : "btn-outline-secondary"
+            }`}
             onClick={() => setAction("Sign Up")}
           >
             Sign Up
           </button>
           <button
             type="button"
-            className={action === "Sign Up" ? "submit gray" : "submit"}
+            className={`btn ${
+              action === "Sign Up" ? "btn-secondary" : "btn-outline-secondary"
+            }`}
             onClick={() => setAction("Login")}
           >
             Login
           </button>
         </div>
-        <button type="submit" className="btn btn-primary">
-          {action}
-        </button>
+        <div className="d-grid">
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </div>
+        {errorMessage && (
+          <div className="alert alert-danger mt-3">{errorMessage}</div>
+        )}
       </form>
-      {errorMessage && <div className="error">{errorMessage}</div>}
     </div>
   );
 };
