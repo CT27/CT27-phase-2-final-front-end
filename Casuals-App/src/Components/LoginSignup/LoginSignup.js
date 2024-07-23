@@ -22,7 +22,7 @@ const LoginSignup = () => {
     try {
       // Fetch user data by email
       const response = await axios.get(
-        `http://localhost:3000/users?email=${email}`
+        `http://localhost:3000/api/users?email=${email}` // Updated URL with /api prefix
       );
       if (response.data.length === 0) {
         throw new Error("User not found");
@@ -53,7 +53,8 @@ const LoginSignup = () => {
     }
     try {
       // Create a new user
-      const response = await axios.post("http://localhost:3000/users", {
+      const response = await axios.post("http://localhost:3000/api/users", {
+        // Updated URL with /api prefix
         name,
         email,
         password,
