@@ -12,7 +12,7 @@ const LoginSignup = () => {
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { login } = useContext(AuthContext);
-  const navigate = useNavigate(); // Update to useNavigate
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {
@@ -20,58 +20,46 @@ const LoginSignup = () => {
       return;
     }
     try {
-      // Fetch user data by email
-      const response = await axios.get(
-        `http://localhost:3000/api/users?email=${email}` // Updated URL with /api prefix
-      );
-      if (response.data.length === 0) {
-        throw new Error("User not found");
-      }
+      const response = await axios.post("http://localhost:3001/api/login", {
+        email,
+        password,
+      });
 
-      const user = response.data[0];
-      if (user.password !== password) {
-        throw new Error("Password incorrect");
-      }
-
+      const user = response.data.user;
       console.log("Login successful:", user);
-      // Store userId in localStorage
+
       localStorage.setItem("userId", user.id);
       login();
 
-      navigate("/dashboard"); // Redirect to dashboard
+      navigate("/dashboard");
     } catch (error) {
       console.error("Login error:", error.message);
-      setErrorMessage(error.message);
+      setErrorMessage(error.response?.data?.message || error.message);
     }
   };
 
   const handleSignup = async () => {
-    // Validate inputs
     if (name === "" || password === "" || email === "") {
       setErrorMessage("Name, email, and password are required.");
       return;
     }
     try {
-      // Create a new user
-      const response = await axios.post("http://localhost:3000/api/users", {
-        // Updated URL with /api prefix
+      const response = await axios.post("http://localhost:3001/api/signup", {
         name,
         email,
         password,
       });
       console.log("Signup response:", response.data);
 
-      // Assuming response.data contains the new user data
-      const newUser = response.data;
+      const newUser = response.data.user;
 
-      // Store userId in localStorage
       localStorage.setItem("userId", newUser.id);
       login();
 
-      navigate("/dashboard"); // Redirect to dashboard
+      navigate("/dashboard");
     } catch (error) {
       console.error("Signup error:", error.message);
-      setErrorMessage(error.message);
+      setErrorMessage(error.response?.data?.message || error.message);
     }
   };
 
