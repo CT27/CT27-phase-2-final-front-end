@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../Header";
 import TimeLogForm from "../TimeLogForm/TimeLogForm";
@@ -8,6 +8,28 @@ import Profile from "../Profile"; // Import the Profile component
 
 const Dashboard = () => {
   const [selectedTile, setSelectedTile] = useState("Timesheet");
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    const storedUserName = localStorage.getItem("userName");
+    const storedUserEmail = localStorage.getItem("userEmail");
+    const storedUserProfilePicture = localStorage.getItem("userProfilePicture");
+
+    if (storedUserId && storedUserName && storedUserEmail) {
+      const userData = {
+        id: storedUserId,
+        name: storedUserName,
+        email: storedUserEmail,
+        profilePicture:
+          storedUserProfilePicture || "path/to/default/profile/photo.jpg",
+      };
+      console.log("User data found in local storage:", userData);
+      setUser(userData);
+    } else {
+      console.log("User data not found in local storage");
+    }
+  }, []);
 
   let content;
   if (selectedTile === "Timesheet") {
@@ -17,7 +39,7 @@ const Dashboard = () => {
   } else if (selectedTile === "Reports") {
     content = <Reports />;
   } else if (selectedTile === "Profile") {
-    content = <Profile />;
+    content = <Profile user={user} />;
   }
 
   return (

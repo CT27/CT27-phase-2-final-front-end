@@ -29,6 +29,17 @@ const LoginSignup = () => {
       console.log("Login successful:", user);
 
       localStorage.setItem("userId", user.id);
+      localStorage.setItem("userName", user.name);
+      localStorage.setItem("userEmail", user.email);
+      localStorage.setItem("userProfilePicture", user.profilePicture || "");
+
+      console.log("Stored user data in local storage: ", {
+        userId: user.id,
+        userName: user.name,
+        userEmail: user.email,
+        userProfilePicture: user.profilePicture || "",
+      });
+
       login();
 
       navigate("/dashboard");
@@ -54,6 +65,17 @@ const LoginSignup = () => {
       const newUser = response.data.user;
 
       localStorage.setItem("userId", newUser.id);
+      localStorage.setItem("userName", newUser.name);
+      localStorage.setItem("userEmail", newUser.email);
+      localStorage.setItem("userProfilePicture", newUser.profilePicture || "");
+
+      console.log("Stored user data in local storage: ", {
+        userId: newUser.id,
+        userName: newUser.name,
+        userEmail: newUser.email,
+        userProfilePicture: newUser.profilePicture || "",
+      });
+
       login();
 
       navigate("/dashboard");
