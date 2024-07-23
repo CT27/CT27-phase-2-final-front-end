@@ -96,64 +96,22 @@ const LoginSignup = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="text-center mb-4">
-        <h1>{action}</h1>
-        <hr className="my-4" />
-      </div>
-      <form onSubmit={handleSubmit}>
-        {action === "Sign Up" && (
-          <div className="mb-3">
-            <label className="form-label" htmlFor="name">
-              <HiOutlineUser className="me-2" /> Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              className="form-control"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-        )}
-
-        <div className="mb-3">
-          <label className="form-label" htmlFor="email">
-            <HiOutlineMail className="me-2" /> Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="form-control"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+    <div className="container mt-5 d-flex justify-content-center">
+      <div
+        className="card p-4 shadow-lg"
+        style={{ maxWidth: "500px", width: "100%" }}
+      >
+        <div className="text-center mb-4">
+          <h1>{action}</h1>
+          <hr className="my-4" />
         </div>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="password">
-            <HiOutlineKey className="me-2" /> Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            className="form-control"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        {action === "Login" && (
-          <div className="mb-3 text-end">
-            <Link to="/forgotpassword">Lost password? Click Here</Link>
-          </div>
-        )}
-        <div className="d-flex justify-content-between mb-3">
+        <div className="d-flex justify-content-center mb-3">
           <button
             type="button"
             className={`btn ${
-              action === "Login" ? "btn-secondary" : "btn-outline-secondary"
+              action === "Sign Up"
+                ? "btn-light text-dark"
+                : "btn-dark text-white"
             }`}
             onClick={() => setAction("Sign Up")}
           >
@@ -161,23 +119,74 @@ const LoginSignup = () => {
           </button>
           <button
             type="button"
-            className={`btn ${
-              action === "Sign Up" ? "btn-secondary" : "btn-outline-secondary"
+            className={`btn ms-2 ${
+              action === "Login" ? "btn-light text-dark" : "btn-dark text-white"
             }`}
             onClick={() => setAction("Login")}
           >
             Login
           </button>
         </div>
-        <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </div>
-        {errorMessage && (
-          <div className="alert alert-danger mt-3">{errorMessage}</div>
-        )}
-      </form>
+        <form onSubmit={handleSubmit}>
+          {action === "Sign Up" && (
+            <div className="mb-3">
+              <label className="form-label" htmlFor="name">
+                <HiOutlineUser className="me-2" /> Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                className="form-control"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+          )}
+
+          <div className="mb-3">
+            <label className="form-label" htmlFor="email">
+              <HiOutlineMail className="me-2" /> Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="form-control"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label" htmlFor="password">
+              <HiOutlineKey className="me-2" /> Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              className="form-control"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          {action === "Login" && (
+            <div className="mb-3 text-end">
+              <Link to="/forgotpassword" className="text-dark">
+                Lost password? Click Here
+              </Link>
+            </div>
+          )}
+          <div className="d-grid">
+            <button type="submit" className="btn btn-dark text-white">
+              Submit
+            </button>
+          </div>
+          {errorMessage && (
+            <div className="alert alert-danger mt-3">{errorMessage}</div>
+          )}
+        </form>
+      </div>
     </div>
   );
 };

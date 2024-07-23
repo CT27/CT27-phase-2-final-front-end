@@ -1,29 +1,50 @@
-.custom-icon {
-    margin-right: 8px;
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
   }
+  
+  .card {
+    border-radius: 8px;
+  }
+  
   .mt-5 {
     margin-top: 3rem;
   }
+  
   .mb-3 {
     margin-bottom: 1rem;
   }
+  
   .mb-4 {
     margin-bottom: 1.5rem;
   }
+  
   .my-4 {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
   }
-  .btn-outline-secondary {
-    border: 1px solid #C70039;
-    color: #C70039;
-  }
-  .btn-outline-secondary:hover {
-    background-color: #C70039;
+  
+  .btn-dark {
+    background-color: black;
+    border-color: black;
     color: white;
   }
-  .btn-primary {
-    background-color: #C70039;
-    border-color: #C70039;
+  
+  .btn-light {
+    background-color: white;
+    border-color: black;
+    color: black;
+  }
+  
+  .btn-light:hover {
+    background-color: black;
+    color: white;
+    border-color: black;
+  }
+  
+  .text-dark {
+    color: black;
   }
   

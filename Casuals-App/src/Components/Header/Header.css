@@ -1,0 +1,22 @@
+/* src/components/Header.css */
+header {
+    border-radius: 8px;
+  }
+  
+  .navbar-brand img {
+    max-width: 150px;
+    height: auto;
+  }
+  
+  .navbar-nav .nav-link {
+    color: #333;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #C70039;
+  }
+  
+  .bg-light {
+    background-color: #f8f9fa !important;
+  }
+  
