@@ -11,10 +11,11 @@ const PaymentDetails = ({ userId }) => {
 
   useEffect(() => {
     const fetchUserDetails = async () => {
-      if (userId) {
+      const storedUserId = userId || localStorage.getItem("userId");
+      if (storedUserId) {
         try {
           const response = await axios.get(
-            `http://localhost:3000/api/users/${userId}`
+            `http://localhost:3000/api/users/${storedUserId}`
           );
           const userDetails = response.data;
           setBankName(userDetails.bankName || "");
@@ -33,7 +34,8 @@ const PaymentDetails = ({ userId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!userId || !bankName || !accountNumber || !bsbCode) {
+    const storedUserId = userId || localStorage.getItem("userId");
+    if (!storedUserId || !bankName || !accountNumber || !bsbCode) {
       setError("All fields are required.");
       return;
     }
@@ -41,7 +43,7 @@ const PaymentDetails = ({ userId }) => {
     try {
       // Fetch the current user data
       const response = await axios.get(
-        `http://localhost:3000/api/users/${userId}`
+        `http://localhost:3000/api/users/${storedUserId}`
       );
       const currentUserDetails = response.data;
 
@@ -55,7 +57,7 @@ const PaymentDetails = ({ userId }) => {
 
       // Update the user data with merged details
       const updateResponse = await axios.put(
-        `http://localhost:3000/api/users/${userId}`,
+        `http://localhost:3000/api/users/${storedUserId}`,
         updatedUserDetails
       );
 
@@ -80,7 +82,7 @@ const PaymentDetails = ({ userId }) => {
             type="text"
             id="userId"
             className="form-control"
-            value={userId || ""}
+            value={userId || localStorage.getItem("userId") || ""}
             readOnly
           />
         </div>

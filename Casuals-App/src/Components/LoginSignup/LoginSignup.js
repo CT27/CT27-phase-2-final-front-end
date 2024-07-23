@@ -140,18 +140,23 @@ const LoginSignup = () => {
         </div>
         <div className="submit-container">
           <button
+            type="button"
             className={action === "Login" ? "submit gray" : "submit"}
             onClick={() => setAction("Sign Up")}
           >
             Sign Up
           </button>
           <button
+            type="button"
             className={action === "Sign Up" ? "submit gray" : "submit"}
             onClick={() => setAction("Login")}
           >
             Login
           </button>
         </div>
+        <button type="submit" className="btn btn-primary">
+          {action}
+        </button>
       </form>
       {errorMessage && <div className="error">{errorMessage}</div>}
     </div>
