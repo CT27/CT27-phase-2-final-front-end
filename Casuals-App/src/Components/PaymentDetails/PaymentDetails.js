@@ -14,7 +14,7 @@ const PaymentDetails = ({ userId }) => {
       if (userId) {
         try {
           const response = await axios.get(
-            `http://localhost:3000/users/${userId}`
+            `http://localhost:3000/api/users/${userId}`
           );
           const userDetails = response.data;
           setBankName(userDetails.bankName || "");
@@ -40,20 +40,22 @@ const PaymentDetails = ({ userId }) => {
 
     try {
       // Fetch the current user data
-      const response = await axios.get(`http://localhost:3000/users/${userId}`);
+      const response = await axios.get(
+        `http://localhost:3000/api/users/${userId}`
+      );
       const currentUserDetails = response.data;
 
       // Merge existing user details with new payment details
       const updatedUserDetails = {
         ...currentUserDetails,
-        bankName,
-        accountNumber,
-        bsbCode,
+        bankName: bankName || currentUserDetails.bankName || "",
+        accountNumber: accountNumber || currentUserDetails.accountNumber || "",
+        bsbCode: bsbCode || currentUserDetails.bsbCode || "",
       };
 
       // Update the user data with merged details
       const updateResponse = await axios.put(
-        `http://localhost:3000/users/${userId}`,
+        `http://localhost:3000/api/users/${userId}`,
         updatedUserDetails
       );
 

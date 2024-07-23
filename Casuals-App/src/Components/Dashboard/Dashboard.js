@@ -35,7 +35,7 @@ const Dashboard = () => {
   if (selectedTile === "Timesheet") {
     content = <TimeLogForm />;
   } else if (selectedTile === "Payment Details") {
-    content = <PaymentDetails />;
+    content = <PaymentDetails userId={user?.id} />;
   } else if (selectedTile === "Reports") {
     content = <Reports />;
   } else if (selectedTile === "Profile") {
