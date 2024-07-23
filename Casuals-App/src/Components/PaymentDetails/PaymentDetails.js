@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./PaymentDetails.css";
 
 const PaymentDetails = ({ userId }) => {
   const [bankName, setBankName] = useState("");
@@ -72,8 +73,8 @@ const PaymentDetails = ({ userId }) => {
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4">Payment Details</h2>
-      <form onSubmit={handleSubmit}>
+      {/* <h2 className="mb-4">Payment Details</h2> */}
+      <form onSubmit={handleSubmit} className="card p-4 shadow">
         <div className="mb-3">
           <label htmlFor="userId" className="form-label">
             User ID:

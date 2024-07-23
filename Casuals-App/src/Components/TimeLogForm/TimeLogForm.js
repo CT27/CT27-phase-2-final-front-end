@@ -4,6 +4,7 @@ import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is imported
 import { format } from "date-fns";
+import "./TimeLogForm.css";
 
 // Dummy event data
 const events = [
@@ -96,10 +97,10 @@ const TimeLogForm = () => {
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4">Time Log Form</h2>
+      {/* <h2 className="mb-4">Time Log Form</h2> */}
       <form onSubmit={handleSubmit}>
         {entries.map((entry, index) => (
-          <div key={index} className="mb-3 border p-3 rounded shadow-sm">
+          <div key={index} className="mb-3 border p-4 rounded shadow-sm">
             <div className="mb-3">
               <label htmlFor={`date-${index}`} className="form-label">
                 Date:

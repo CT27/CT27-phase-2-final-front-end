@@ -1,0 +1,19 @@
+.tile {
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .tile:hover {
+    background-color: #343a40 !important;
+    color: white !important;
+  }
+  
+  .card {
+    border-radius: 8px;
+  }
+  
+  .content-container {
+    background-color: white;
+    border-radius: 8px;
+  }
+  

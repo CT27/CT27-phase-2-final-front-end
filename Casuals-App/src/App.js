@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import LoginSignup from "./Components/LoginSignup/LoginSignup";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
-import Profile from "./Components/Profile"; // Import Profile component
+import Profile from "./Components/Profile/Profile"; // Import Profile component
 
 function App() {
   return (

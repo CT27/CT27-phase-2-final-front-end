@@ -19,30 +19,32 @@ const Reports = () => {
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4">Reports</h2>
-      <div className="table-responsive">
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Hours</th>
-              <th>Event</th>
-              <th>Authorizer</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reports.map((report, index) => (
-              <tr key={index}>
-                <td>{report.date}</td>
-                <td>{report.hours}</td>
-                <td>{report.event}</td>
-                <td>{report.authorizer}</td>
-                <td>${(report.hours * RATE_PER_HOUR).toFixed(2)}</td>
+      {/* <h2 className="mb-4">Reports</h2> */}
+      <div className="card p-4 shadow">
+        <div className="table-responsive">
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Hours</th>
+                <th>Event</th>
+                <th>Authorizer</th>
+                <th>Amount</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {reports.map((report, index) => (
+                <tr key={index}>
+                  <td>{report.date}</td>
+                  <td>{report.hours}</td>
+                  <td>{report.event}</td>
+                  <td>{report.authorizer}</td>
+                  <td>${(report.hours * RATE_PER_HOUR).toFixed(2)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
