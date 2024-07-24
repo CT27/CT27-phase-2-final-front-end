@@ -5,7 +5,6 @@ import TimeLogForm from "../TimeLogForm/TimeLogForm";
 import PaymentDetails from "../PaymentDetails/PaymentDetails";
 import Reports from "../Reports/Reports";
 import Profile from "../Profile/Profile"; // Import the Profile component
-import "./Dashboard.css"; // Import custom CSS for additional styling
 
 const Dashboard = () => {
   const [selectedTile, setSelectedTile] = useState("Timesheet");
@@ -49,7 +48,7 @@ const Dashboard = () => {
       <div className="row mb-4">
         <div className="col-md-3 mb-3">
           <div
-            className={`tile card text-center p-3 ${
+            className={`card text-center p-3 ${
               selectedTile === "Profile" ? "bg-dark text-white" : "bg-light"
             } cursor-pointer`}
             onClick={() => setSelectedTile("Profile")}
@@ -59,7 +58,7 @@ const Dashboard = () => {
         </div>
         <div className="col-md-3 mb-3">
           <div
-            className={`tile card text-center p-3 ${
+            className={`card text-center p-3 ${
               selectedTile === "Timesheet" ? "bg-dark text-white" : "bg-light"
             } cursor-pointer`}
             onClick={() => setSelectedTile("Timesheet")}
@@ -69,7 +68,7 @@ const Dashboard = () => {
         </div>
         <div className="col-md-3 mb-3">
           <div
-            className={`tile card text-center p-3 ${
+            className={`card text-center p-3 ${
               selectedTile === "Payment Details"
                 ? "bg-dark text-white"
                 : "bg-light"
@@ -81,7 +80,7 @@ const Dashboard = () => {
         </div>
         <div className="col-md-3 mb-3">
           <div
-            className={`tile card text-center p-3 ${
+            className={`card text-center p-3 ${
               selectedTile === "Reports" ? "bg-dark text-white" : "bg-light"
             } cursor-pointer`}
             onClick={() => setSelectedTile("Reports")}
@@ -90,7 +89,9 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="content-container card p-4 shadow-lg">{content}</div>
+      <div className="row h-100">
+        <div className="col-md-12 main-content p-4">{content}</div>
+      </div>
     </div>
   );
 };
