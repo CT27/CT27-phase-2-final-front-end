@@ -1,18 +1,15 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./Header.css";
 import logo from "../Assets/EVSPLwordnologo.png";
 
 const Header = () => {
   return (
-    <header className="bg-light border rounded py-2 mb-3">
+    <header className="header-container">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
-            <img
-              src={logo}
-              alt="Logo"
-              style={{ width: "150px", height: "auto", objectFit: "contain" }}
-            />
+            <img src={logo} alt="Logo" className="header-logo" />
           </a>
           <button
             className="navbar-toggler"

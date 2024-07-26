@@ -1,13 +1,13 @@
-.card {
-    border-radius: 8px;
+.profile-card {
+    border-radius: 10px;
   }
   
-  .shadow {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .rounded-circle {
+  .profile-card img {
     width: 80px;
     height: 80px;
+  }
+  
+  .profile-card h4 {
+    margin: 0;
   }
   

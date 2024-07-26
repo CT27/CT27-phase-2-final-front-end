@@ -1,6 +1,7 @@
 import React from "react";
 import { FaSignOutAlt } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./Profile.css";
 
 const Profile = ({ user }) => {
   const handleSignOut = () => {
@@ -18,7 +19,7 @@ const Profile = ({ user }) => {
   console.log("User data in Profile component:", user);
 
   return (
-    <div className="card mb-4">
+    <div className="card mb-4 profile-card">
       <div className="card-body d-flex align-items-center">
         <img
           src={user.profilePicture || "path/to/default/profile/photo.jpg"}

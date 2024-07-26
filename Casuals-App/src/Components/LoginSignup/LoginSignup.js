@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { AuthContext } from "../AuthContext"; // Ensure this path is correct
+import { AuthContext } from "../AuthContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./LoginSignup.css";
 import { HiOutlineMail, HiOutlineUser, HiOutlineKey } from "react-icons/hi";
@@ -97,10 +97,7 @@ const LoginSignup = () => {
 
   return (
     <div className="container mt-5 d-flex justify-content-center">
-      <div
-        className="card p-4 shadow-lg"
-        style={{ maxWidth: "500px", width: "100%" }}
-      >
+      <div className="card p-4 shadow-lg login-signup-card">
         <div className="text-center mb-4">
           <h1>{action}</h1>
           <hr className="my-4" />

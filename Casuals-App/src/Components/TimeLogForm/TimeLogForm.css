@@ -1,11 +1,5 @@
-.border {
-  border-radius: 8px;
-}
-
-.shadow-sm {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.react-select-container {
-  width: 100%;
+.time-log-entry {
+  background-color: #F8F9FA;
+  border-radius: 10px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }

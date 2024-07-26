@@ -42,13 +42,11 @@ const PaymentDetails = ({ userId }) => {
     }
 
     try {
-      // Fetch the current user data
       const response = await axios.get(
         `http://localhost:3000/api/users/${storedUserId}`
       );
       const currentUserDetails = response.data;
 
-      // Merge existing user details with new payment details
       const updatedUserDetails = {
         ...currentUserDetails,
         bankName: bankName || currentUserDetails.bankName || "",
@@ -56,7 +54,6 @@ const PaymentDetails = ({ userId }) => {
         bsbCode: bsbCode || currentUserDetails.bsbCode || "",
       };
 
-      // Update the user data with merged details
       const updateResponse = await axios.put(
         `http://localhost:3000/api/users/${storedUserId}`,
         updatedUserDetails
@@ -73,8 +70,7 @@ const PaymentDetails = ({ userId }) => {
 
   return (
     <div className="container mt-4">
-      {/* <h2 className="mb-4">Payment Details</h2> */}
-      <form onSubmit={handleSubmit} className="card p-4 shadow">
+      <form onSubmit={handleSubmit} className="border p-4 rounded shadow-sm">
         <div className="mb-3">
           <label htmlFor="userId" className="form-label">
             User ID:

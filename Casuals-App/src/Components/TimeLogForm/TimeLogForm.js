@@ -2,24 +2,20 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
-import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is imported
-import { format } from "date-fns";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./TimeLogForm.css";
+import { format } from "date-fns";
 
-// Dummy event data
 const events = [
   { value: "event1", label: "Event 1" },
   { value: "event2", label: "Event 2" },
   { value: "event3", label: "Event 3" },
-  // Add more dummy events as needed
 ];
 
-// Dummy authorizers data
 const authorizers = [
   { value: "authorizer1", label: "Manager 1" },
   { value: "authorizer2", label: "Manager 2" },
   { value: "authorizer3", label: "Manager 3" },
-  // Add more dummy authorizers as needed
 ];
 
 const TimeLogForm = () => {
@@ -91,16 +87,17 @@ const TimeLogForm = () => {
 
     alert("Time log entries sent for authorization!");
 
-    // Clear form fields
     setEntries([{ date: null, event: null, hours: "", authorizer: null }]);
   };
 
   return (
     <div className="container mt-4">
-      {/* <h2 className="mb-4">Time Log Form</h2> */}
       <form onSubmit={handleSubmit}>
         {entries.map((entry, index) => (
-          <div key={index} className="mb-3 border p-4 rounded shadow-sm">
+          <div
+            key={index}
+            className="mb-3 border p-4 rounded shadow-sm time-log-entry"
+          >
             <div className="mb-3">
               <label htmlFor={`date-${index}`} className="form-label">
                 Date:

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./Dashboard.css";
 import Header from "../Header/Header";
 import TimeLogForm from "../TimeLogForm/TimeLogForm";
 import PaymentDetails from "../PaymentDetails/PaymentDetails";
 import Reports from "../Reports/Reports";
-import Profile from "../Profile/Profile"; // Import the Profile component
+import Profile from "../Profile/Profile";
 
 const Dashboard = () => {
   const [selectedTile, setSelectedTile] = useState("Timesheet");
@@ -44,54 +45,22 @@ const Dashboard = () => {
 
   return (
     <div className="container-fluid h-100">
-      <Header /> {/* Add the Header component here */}
-      <div className="row mb-4">
-        <div className="col-md-3 mb-3">
-          <div
-            className={`card text-center p-3 ${
-              selectedTile === "Profile" ? "bg-dark text-white" : "bg-light"
-            } cursor-pointer`}
-            onClick={() => setSelectedTile("Profile")}
-          >
-            Profile
+      <Header />
+      <div className="tiles-container row mb-4">
+        {["Profile", "Timesheet", "Payment Details", "Reports"].map((tile) => (
+          <div key={tile} className="col-md-3 mb-3">
+            <div
+              className={`p-3 tile ${
+                selectedTile === tile ? "tile-selected" : ""
+              }`}
+              onClick={() => setSelectedTile(tile)}
+            >
+              {tile}
+            </div>
           </div>
-        </div>
-        <div className="col-md-3 mb-3">
-          <div
-            className={`card text-center p-3 ${
-              selectedTile === "Timesheet" ? "bg-dark text-white" : "bg-light"
-            } cursor-pointer`}
-            onClick={() => setSelectedTile("Timesheet")}
-          >
-            Timesheet
-          </div>
-        </div>
-        <div className="col-md-3 mb-3">
-          <div
-            className={`card text-center p-3 ${
-              selectedTile === "Payment Details"
-                ? "bg-dark text-white"
-                : "bg-light"
-            } cursor-pointer`}
-            onClick={() => setSelectedTile("Payment Details")}
-          >
-            Payment Details
-          </div>
-        </div>
-        <div className="col-md-3 mb-3">
-          <div
-            className={`card text-center p-3 ${
-              selectedTile === "Reports" ? "bg-dark text-white" : "bg-light"
-            } cursor-pointer`}
-            onClick={() => setSelectedTile("Reports")}
-          >
-            Reports
-          </div>
-        </div>
+        ))}
       </div>
-      <div className="row h-100">
-        <div className="col-md-12 main-content p-4">{content}</div>
-      </div>
+      <div className="h-100">{content}</div>
     </div>
   );
 };
