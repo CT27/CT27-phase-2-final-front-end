@@ -68,36 +68,44 @@ const Profile = ({ userId }) => {
   return (
     <div className="container mt-5 d-flex justify-content-center">
       <div className="card p-4 shadow-lg profile-card">
+        <div className="text-center mb-4">
+          <h2 className="card-title">Profile</h2>
+          <hr />
+        </div>
         {isEditing ? (
-          <div className="mb-3">
-            <label className="form-label" htmlFor="name">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              className="form-control"
-              name="name"
-              value={updatedDetails.name}
-              onChange={handleChange}
-            />
-            <label className="form-label mt-3" htmlFor="email">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="form-control"
-              name="email"
-              value={updatedDetails.email}
-              onChange={handleChange}
-            />
-            <div className="d-grid mt-3">
+          <div>
+            <div className="mb-3">
+              <label className="form-label" htmlFor="name">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                className="form-control"
+                name="name"
+                value={updatedDetails.name}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label" htmlFor="email">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="form-control"
+                name="email"
+                value={updatedDetails.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="d-grid gap-2">
               <button className="btn btn-primary" onClick={handleSave}>
                 Save
               </button>
               <button
-                className="btn btn-secondary mt-2"
+                className="btn btn-secondary"
                 onClick={() => setIsEditing(false)}
               >
                 Cancel
@@ -109,21 +117,21 @@ const Profile = ({ userId }) => {
             <h4>{user.name}</h4>
             <p>{user.email}</p>
             <p>ID: {user.id}</p>
-            <div className="d-grid mt-3">
+            <div className="d-grid gap-2">
               <button
                 className="btn btn-dark text-white"
                 onClick={() => setIsEditing(true)}
               >
                 Edit Profile
               </button>
+              <button
+                className="btn btn-outline-danger"
+                onClick={handleSignOut}
+              >
+                <FaSignOutAlt className="me-2" />
+                Sign Out
+              </button>
             </div>
-            <button
-              className="btn btn-outline-danger mt-3"
-              onClick={handleSignOut}
-            >
-              <FaSignOutAlt className="me-2" />
-              Sign Out
-            </button>
           </div>
         )}
       </div>

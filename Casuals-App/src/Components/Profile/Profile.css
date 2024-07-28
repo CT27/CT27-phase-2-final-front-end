@@ -1,12 +1,12 @@
 .profile-card {
-  height: calc(100vh - 110px); /* Adjust height to fit without scrolling */
+  height: calc((100vh - 110px) * 2 / 3); /* Adjust height to be two-thirds of the current value */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   border-radius: 10px;
   background-color: #f8f9fa;
-  padding: 15px; /* Reduced padding */
+  padding: 20px; /* Slightly increased padding */
   margin-top: 20px;
   margin-bottom: 20px; /* Add bottom margin to match the gap */
   overflow: hidden; /* Ensure contents always fit inside */
@@ -16,12 +16,12 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 15px; /* Reduced margin */
+  margin-bottom: 20px; /* Increased margin */
 }
 
 .profile-picture {
-  width: 100px;
-  height: 100px;
+  width: 120px; /* Increased size */
+  height: 120px;
 }
 
 .profile-details {
@@ -30,19 +30,23 @@
 }
 
 .profile-details h4 {
-  margin: 0;
+  margin: 10px 0; /* Added some margin for spacing */
+  font-size: 1.5rem; /* Increased font size */
 }
 
 .profile-details p {
-  margin: 5px 0;
+  margin: 10px 0; /* Increased margin for better spacing */
+  font-size: 1.1rem; /* Slightly increased font size */
 }
 
 .profile-details button {
-  margin-top: 10px;
+  margin-top: 20px; /* Increased margin for spacing */
   width: 100%;
-  background: linear-gradient(#1A1A1A, #1F1F1F);
+  background: linear-gradient(#1a1a1a, #1f1f1f);
   color: #ffffff;
   border: none;
+  padding: 10px; /* Added padding for better button size */
+  border-radius: 5px; /* Added border radius for rounded button */
 }
 
 .profile-details button:hover {
