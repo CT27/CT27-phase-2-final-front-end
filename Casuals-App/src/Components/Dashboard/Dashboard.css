@@ -1,27 +1,33 @@
 .tile {
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s, box-shadow 0.3s;
-  }
-  
-  .tile:hover {
-    background-color: #e9ecef;
-  }
-  
-  .tile-selected {
-    background-color: #343a40;
-    color: #ffffff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .container-fluid {
-    padding-top: 20px;
-  }
-  
-  .tiles-container {
-    margin-top: 20px;
-  }
-  
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.tile:hover {
+  background-color: #e9ecef;
+}
+
+.tile-selected {
+  background-color: #343a40;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.container-fluid {
+  padding-top: 20px;
+}
+
+.tiles-container {
+  margin-top: 20px;
+}
+
+.content-area {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}

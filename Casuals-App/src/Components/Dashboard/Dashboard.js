@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Dashboard.css";
 import Header from "../Header/Header";
 import TimeLogForm from "../TimeLogForm/TimeLogForm";
-import PaymentDetails from "../PaymentDetails/PaymentDetails";
 import Reports from "../Reports/Reports";
 import Profile from "../Profile/Profile";
 
@@ -35,32 +34,35 @@ const Dashboard = () => {
   let content;
   if (selectedTile === "Timesheet") {
     content = <TimeLogForm />;
-  } else if (selectedTile === "Payment Details") {
-    content = <PaymentDetails userId={user?.id} />;
   } else if (selectedTile === "Reports") {
     content = <Reports />;
-  } else if (selectedTile === "Profile") {
-    content = <Profile user={user} />;
   }
 
   return (
     <div className="container-fluid h-100">
       <Header />
-      <div className="tiles-container row mb-4">
-        {["Profile", "Timesheet", "Payment Details", "Reports"].map((tile) => (
-          <div key={tile} className="col-md-3 mb-3">
-            <div
-              className={`p-3 tile ${
-                selectedTile === tile ? "tile-selected" : ""
-              }`}
-              onClick={() => setSelectedTile(tile)}
-            >
-              {tile}
-            </div>
+      <div className="row h-100">
+        <div className="col-md-3">
+          <Profile user={user} />
+        </div>
+        <div className="col-md-9">
+          <div className="tiles-container row mb-4">
+            {["Timesheet", "Reports"].map((tile) => (
+              <div key={tile} className="col-md-6 mb-3">
+                <div
+                  className={`p-3 tile ${
+                    selectedTile === tile ? "tile-selected" : ""
+                  }`}
+                  onClick={() => setSelectedTile(tile)}
+                >
+                  {tile}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+          <div className="content-area">{content}</div>
+        </div>
       </div>
-      <div className="h-100">{content}</div>
     </div>
   );
 };

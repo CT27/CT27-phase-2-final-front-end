@@ -19,23 +19,22 @@ const Profile = ({ user }) => {
   console.log("User data in Profile component:", user);
 
   return (
-    <div className="card mb-4 profile-card">
-      <div className="card-body d-flex align-items-center">
+    <div className="profile-card">
+      <div className="profile-picture-container">
         <img
           src={user.profilePicture || "path/to/default/profile/photo.jpg"}
           alt="Profile"
-          className="rounded-circle me-3"
-          style={{ width: "80px", height: "80px" }}
+          className="rounded-circle profile-picture"
         />
-        <div>
-          <h4>{user.name}</h4>
-          <p>{user.email}</p>
-          <p>ID: {user.id}</p>
-          <button className="btn btn-outline-danger" onClick={handleSignOut}>
-            <FaSignOutAlt className="me-2" />
-            Sign Out
-          </button>
-        </div>
+      </div>
+      <div className="profile-details">
+        <h4>{user.name}</h4>
+        <p>{user.email}</p>
+        <p>ID: {user.id}</p>
+        <button className="btn btn-outline-danger" onClick={handleSignOut}>
+          <FaSignOutAlt className="me-2" />
+          Sign Out
+        </button>
       </div>
     </div>
   );

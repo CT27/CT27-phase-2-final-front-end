@@ -1,5 +1,6 @@
 .header-container {
-    background-color: #f8f9fa;
+    background-color: linear-gradient(#1A1A1A,#1F1F1F);
+    background: linear-gradient(#1A1A1A,#1F1F1F);
     border-bottom: 1px solid #dee2e6;
     padding: 10px 0;
   }
@@ -15,3 +16,6 @@
     align-items: center;
   }
   
+  .navbar {
+    background: linear-gradient(#1A1A1A,#1F1F1F);
+  }
