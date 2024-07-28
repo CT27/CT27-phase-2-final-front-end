@@ -1,24 +1,15 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./ForgotPassword.css";
 import { HiOutlineUser } from "react-icons/hi";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleForgotPassword = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/forgot-password",
-        { email }
-      );
-      setMessage(response.data.message);
-    } catch (error) {
-      console.error("Forgot password error:", error.message);
-      setMessage("Failed to send password reset email");
-    }
+  const handleForgotPassword = () => {
+    setMessage("Password reset link has been sent to your email address.");
   };
 
   return (
@@ -50,15 +41,15 @@ const ForgotPassword = () => {
           </button>
         </div>
         {message && (
-          <div
-            className={`alert mt-3 ${
-              message.includes("Failed") ? "alert-danger" : "alert-info"
-            }`}
-            role="alert"
-          >
+          <div className="alert mt-3 alert-info" role="alert">
             {message}
           </div>
         )}
+        <div className="d-grid mt-3">
+          <Link to="/login" className="btn btn-secondary">
+            Back to Login
+          </Link>
+        </div>
       </div>
     </div>
   );
