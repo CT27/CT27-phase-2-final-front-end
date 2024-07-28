@@ -66,7 +66,7 @@ const Profile = ({ userId }) => {
   console.log("User data in Profile component:", user);
 
   return (
-    <div className="container mt-5 d-flex justify-content-center">
+    <div className="container mt-5 d-flex justify-content-center bg-white-card">
       <div className="card p-4 shadow-lg profile-card">
         <div className="text-center mb-4">
           <h2 className="card-title">Profile</h2>

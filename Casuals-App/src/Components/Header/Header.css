@@ -1,7 +1,7 @@
 .header-container {
-  background: linear-gradient(#1A1A1A, #1F1F1F);
-  border-bottom: 1px solid #dee2e6;
-  padding: 10px 0; /* Standard padding for a normal-sized header */
+  background: #ffffff;
+  border-bottom: 1px solid #ffffff;
+  padding: 10px 20px; /* Consistent padding */
   border-radius: 8px; /* Add rounded edges */
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Optional: Add some shadow for a better look */
 }
@@ -18,7 +18,7 @@
 }
 
 .navbar {
-  background: linear-gradient(#1A1A1A, #1F1F1F);
+  background: #dee2e6;
   border-radius: 8px; /* Ensure navbar also has rounded edges */
 }
 

@@ -159,16 +159,14 @@ const TimeLogForm = () => {
             </button>
           </div>
         ))}
-        <button
-          type="button"
-          onClick={addEntry}
-          className="btn btn-success me-2"
-        >
-          Add Entry
-        </button>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
+        <div className="time-log-form-buttons">
+          <button type="button" onClick={addEntry} className="btn me-2">
+            Add Entry
+          </button>
+          <button type="submit" className="btn">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
