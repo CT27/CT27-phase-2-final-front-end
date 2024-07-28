@@ -8,26 +8,15 @@ import Profile from "../Profile/Profile";
 
 const Dashboard = () => {
   const [selectedTile, setSelectedTile] = useState("Timesheet");
-  const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
-    const storedUserName = localStorage.getItem("userName");
-    const storedUserEmail = localStorage.getItem("userEmail");
-    const storedUserProfilePicture = localStorage.getItem("userProfilePicture");
-
-    if (storedUserId && storedUserName && storedUserEmail) {
-      const userData = {
-        id: storedUserId,
-        name: storedUserName,
-        email: storedUserEmail,
-        profilePicture:
-          storedUserProfilePicture || "path/to/default/profile/photo.jpg",
-      };
-      console.log("User data found in local storage:", userData);
-      setUser(userData);
+    if (storedUserId) {
+      setUserId(storedUserId);
+      console.log("User ID found in local storage:", storedUserId);
     } else {
-      console.log("User data not found in local storage");
+      console.log("User ID not found in local storage");
     }
   }, []);
 
@@ -42,9 +31,7 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <Header />
       <div className="row h-100">
-        <div className="col-md-3">
-          <Profile user={user} />
-        </div>
+        <div className="col-md-3">{userId && <Profile userId={userId} />}</div>
         <div className="col-md-9">
           <div className="tiles-container row mb-4">
             {["Timesheet", "Reports"].map((tile) => (
