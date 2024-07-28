@@ -6,7 +6,7 @@ import logo from "../Assets/EVSPLwordnologo.png";
 const Header = () => {
   return (
     <header className="header-container">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
             <img src={logo} alt="Logo" className="header-logo" />

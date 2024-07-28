@@ -1,13 +1,14 @@
 .profile-card {
-  height: calc(100vh - 70px); /* Subtract the height of the header */
+  height: calc(100vh - 110px); /* Adjust height to fit without scrolling */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   border-radius: 10px;
   background-color: #f8f9fa;
-  padding: 20px;
+  padding: 15px; /* Reduced padding */
   margin-top: 20px;
+  margin-bottom: 20px; /* Add bottom margin to match the gap */
   overflow: hidden; /* Ensure contents always fit inside */
 }
 
@@ -15,7 +16,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px; /* Reduced margin */
 }
 
 .profile-picture {
@@ -39,4 +40,12 @@
 .profile-details button {
   margin-top: 10px;
   width: 100%;
+  background: linear-gradient(#1A1A1A, #1F1F1F);
+  color: #ffffff;
+  border: none;
+}
+
+.profile-details button:hover {
+  background-color: #e9ecef;
+  color: #000000;
 }

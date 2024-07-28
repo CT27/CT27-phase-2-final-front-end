@@ -39,7 +39,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="container-fluid h-100">
+    <div className="dashboard-container">
       <Header />
       <div className="row h-100">
         <div className="col-md-3">
@@ -55,7 +55,7 @@ const Dashboard = () => {
                   }`}
                   onClick={() => setSelectedTile(tile)}
                 >
-                  {tile}
+                  <span className="tile-label">{tile}</span>
                 </div>
               </div>
             ))}
