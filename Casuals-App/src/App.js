@@ -10,7 +10,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import LoginSignup from "./Components/LoginSignup/LoginSignup";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
-import Profile from "./Components/Profile/Profile"; // Import Profile component
+import Profile from "./Components/Profile/Profile";
+import About from "./Components/About/About";
+import Verification from "./Components/Verification/Verification";
+import Contact from "./Components/Contact/Contact";
 
 function App() {
   return (
@@ -19,8 +22,10 @@ function App() {
         <Route path="/login" element={<LoginSignup />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/profile" element={<Profile />} />{" "}
-        {/* Add Profile route */}
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/verification" element={<Verification />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
