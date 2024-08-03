@@ -15,13 +15,18 @@ const LoginSignup = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  // Add a console log to verify the API URL
+  console.log("API URL:", apiUrl);
+
   const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {
       setErrorMessage("Email and password are required.");
       return;
     }
     try {
-      const response = await axios.post("http://localhost:3001/api/login", {
+      const response = await axios.post(`${apiUrl}/api/login`, {
         email,
         password,
       });
@@ -56,7 +61,7 @@ const LoginSignup = () => {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:3001/api/signup", {
+      const response = await axios.post(`${apiUrl}/api/signup`, {
         name,
         email,
         password,
