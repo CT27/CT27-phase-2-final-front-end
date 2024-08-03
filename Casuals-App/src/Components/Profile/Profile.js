@@ -23,8 +23,8 @@ const Profile = ({ userId }) => {
     const fetchUser = async () => {
       try {
         console.log("Fetching user data for ID:", userId);
-        console.log("API URL:", `${apiUrl}/users/${userId}`);
-        const response = await axios.get(`${apiUrl}/users/${userId}`);
+        console.log("API URL:", `${apiUrl}/api/users/${userId}`);
+        const response = await axios.get(`${apiUrl}/api/users/${userId}`);
         console.log("User data fetched successfully:", response.data);
         setUser(response.data);
         setUpdatedDetails({
@@ -44,7 +44,7 @@ const Profile = ({ userId }) => {
     try {
       const updatedUser = { ...user, ...updatedDetails };
       console.log("Updating user data:", updatedUser);
-      await axios.patch(`${apiUrl}/users/${userId}`, updatedUser);
+      await axios.patch(`${apiUrl}/api/users/${userId}`, updatedUser);
       console.log("User data updated successfully.");
       setUser(updatedUser);
       setIsEditing(false);
