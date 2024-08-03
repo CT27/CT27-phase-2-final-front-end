@@ -33,6 +33,7 @@ const Profile = ({ userId }) => {
         });
       } catch (error) {
         console.error("Error fetching user data:", error);
+        console.error("Error details:", error.response || error.message);
       }
     };
 
