@@ -12,14 +12,20 @@ const Profile = ({ userId }) => {
     email: "",
   });
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
-    if (!userId) return;
+    if (!userId) {
+      console.log("No user ID provided.");
+      return;
+    }
 
     const fetchUser = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/users/${userId}`
-        );
+        console.log("Fetching user data for ID:", userId);
+        console.log("API URL:", `${apiUrl}/users/${userId}`);
+        const response = await axios.get(`${apiUrl}/users/${userId}`);
+        console.log("User data fetched successfully:", response.data);
         setUser(response.data);
         setUpdatedDetails({
           name: response.data.name,
@@ -31,12 +37,14 @@ const Profile = ({ userId }) => {
     };
 
     fetchUser();
-  }, [userId]);
+  }, [userId, apiUrl]);
 
   const handleSave = async () => {
     try {
       const updatedUser = { ...user, ...updatedDetails };
-      await axios.patch(`http://localhost:3000/users/${userId}`, updatedUser);
+      console.log("Updating user data:", updatedUser);
+      await axios.patch(`${apiUrl}/users/${userId}`, updatedUser);
+      console.log("User data updated successfully.");
       setUser(updatedUser);
       setIsEditing(false);
     } catch (error) {
